@@ -1,13 +1,14 @@
-import React from "react"
-import PropTypes from "prop-types"
-import styled from "styled-components"
-import Ratingg from "../Components/Rating"
-import Button from "@material-ui/core/Button"
-import { makeStyles } from "@material-ui/core/styles"
-import DeleteIcon from "@material-ui/icons/Delete"
-import { Link } from "react-router-dom"
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "styled-components";
+import Ratingg from "../Components/Rating";
+import Button from "@material-ui/core/Button";
+import { makeStyles } from "@material-ui/core/styles";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { Link } from "react-router-dom";
+import { IMAGE_BASE_URL } from "./Config";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   button: {
     margin: theme.spacing(1),
     background: "mediumslateblue",
@@ -21,16 +22,16 @@ const useStyles = makeStyles((theme) => ({
       background: "gray",
     },
   },
-}))
+}));
 
 const Container = styled.div`
   font-size: 12px;
   min-height: 350px;
   // border: 1px solid red;
   width: 200px;
-`
+`;
 const Image = styled.div`
-  background-image: url(${(props) => props.bgUrl});
+  background-image: url(${props => props.bgUrl});
 
   width: 200px;
 
@@ -43,7 +44,7 @@ const Image = styled.div`
   border-radius: 4px;
 
   transition: all 0.1s linear 0s;
-`
+`;
 const Rating = styled.span`
   font-size: 15px;
   position: absolute;
@@ -51,7 +52,7 @@ const Rating = styled.span`
   right: 5px;
   opacity: 0;
   transition: all 0.1s linear 0s;
-`
+`;
 const ImageContainer = styled.div`
   margin-bottom: 5px;
 
@@ -95,7 +96,7 @@ const ImageContainer = styled.div`
     box-shadow: 0rem 2rem 5rem var(--shadow-color-dark);
     transition: all 100ms cubic-bezier(0.215, 0.61, 0.355, 1);
   }
-`
+`;
 
 const Title = styled.span`
   font-size: 20px;
@@ -104,7 +105,7 @@ const Title = styled.span`
   justify-content: center;
   align-items: center;
   padding: 1rem;
-`
+`;
 const Year = styled.span`
   display: flex;
   justify-content: center;
@@ -112,7 +113,7 @@ const Year = styled.span`
   align-items: center;
   margin-bottom: 0.5rem;
   color: var(--color-primary);
-`
+`;
 
 const RatingsWrapper = styled.div`
   position: relative;
@@ -123,14 +124,22 @@ const RatingsWrapper = styled.div`
   ${Container}:hover & {
     color: var(--color-primary-lighter);
   }
-`
+`;
 
 const DelBtnContainer = styled.div`
   text-align: center;
-`
+`;
 
-const FavoritePoster = ({ onClickDelete, id, imageUrl, title, rating, year, isMovie = false }) => {
-  const classes = useStyles()
+const FavoritePoster = ({
+  onClickDelete,
+  id,
+  imageUrl,
+  title,
+  rating,
+  year,
+  isMovie = false,
+}) => {
+  const classes = useStyles();
   return (
     <Container>
       <Link to={`/movie/${id}`}>
@@ -138,7 +147,7 @@ const FavoritePoster = ({ onClickDelete, id, imageUrl, title, rating, year, isMo
           <Image
             bgUrl={
               imageUrl
-                ? `https://image.tmdb.org/t/p/w300${imageUrl}`
+                ? `${IMAGE_BASE_URL}w500${imageUrl}`
                 : "https://www.movienewz.com/img/films/poster-holder.jpg"
             }
           />
@@ -153,16 +162,10 @@ const FavoritePoster = ({ onClickDelete, id, imageUrl, title, rating, year, isMo
       </Link>
       <RatingsWrapper>
         <Title>
-          {/* <DelBtn
-            onClick={() => onClickDelete(id, localStorage.getItem("userId"))}
-          >
-            del
-          </DelBtn> */}
-
           {title.length > 18 ? `${title.substring(0, 8)}...` : title}
         </Title>
         <Year>
-          <Ratingg number={rating / 2} myColor="white"/>
+          <Ratingg number={rating / 2} myColor="white" />
         </Year>
       </RatingsWrapper>
       <DelBtnContainer>
@@ -177,8 +180,8 @@ const FavoritePoster = ({ onClickDelete, id, imageUrl, title, rating, year, isMo
         </Button>
       </DelBtnContainer>
     </Container>
-  )
-}
+  );
+};
 
 FavoritePoster.propTypes = {
   id: PropTypes.number.isRequired,
@@ -187,5 +190,5 @@ FavoritePoster.propTypes = {
   rating: PropTypes.number,
   year: PropTypes.string,
   isMovie: PropTypes.bool,
-}
-export default FavoritePoster
+};
+export default FavoritePoster;

@@ -32,7 +32,7 @@ import Button from "@material-ui/core/Button";
 import Dropzone from "react-dropzone";
 import Axios from "axios";
 import { withRouter } from "react-router-dom";
-
+import { LOCAL_SERVER } from "../../Components/Config";
 import "antd/dist/antd.css";
 
 const { Title } = Typography;
@@ -195,10 +195,10 @@ function UpdateProfile(props) {
                   }}
                   src={
                     FilePath
-                      ? `http://localhost:5000/${FilePath}`
+                      ? `${LOCAL_SERVER}${FilePath}`
                       : currentImage
-                      ? `http://localhost:5000/${currentImage}`
-                      : `http://localhost:5000/uploads/default.png`
+                      ? `${LOCAL_SERVER}${currentImage}`
+                      : `${LOCAL_SERVER}uploads/default.png`
                   }
                   alt="haha"
                   width="110px"

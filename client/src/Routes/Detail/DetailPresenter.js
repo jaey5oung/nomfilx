@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 import Cast from "./Cast/Cast";
 import Video from "./Video/Video";
 import Favorite from "./Sections/Favorite";
-
+import { IMAGE_BASE_URL } from "../../Components/Config";
 import Recommendation from "./Recommendation/Recommendation";
 
 const Container = styled.div`
@@ -180,12 +180,12 @@ const DetailPresenter = ({
         </title>
       </Helmet>
       <Backdrop
-        bgImage={`https://image.tmdb.org/t/p/original${result.backdrop_path}`}
+        bgImage={`${IMAGE_BASE_URL}original${result.backdrop_path}`}
       />
 
       <Content>
         <Cover
-          bgImage={`https://image.tmdb.org/t/p/original${result.poster_path}`}
+          bgImage={`${IMAGE_BASE_URL}original${result.poster_path}`}
         />
         <Data>
           <Title>

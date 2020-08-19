@@ -17,7 +17,7 @@ function ProductList(props) {
           i++;
         });
         const flatlist = newDoc.flat();
-        console.log(2222222, flatlist);
+        // console.log(2222222, flatlist);
         setHistory(flatlist);
       } else {
         alert("정보를 가져오는데 실패했습니다.");

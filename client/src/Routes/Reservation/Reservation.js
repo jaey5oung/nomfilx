@@ -159,7 +159,6 @@ const Reservation = ({ userFrom, nowPlaying }) => {
   };
 
   useEffect(() => {
-    // console.log("유즈이펙트 실행", movie, selectDay, time);
     const movieTitle = {
       title: movie,
     };
@@ -176,7 +175,6 @@ const Reservation = ({ userFrom, nowPlaying }) => {
               seatlist.push(obj);
             }
           });
-          // console.log("22222", seatlist);
           setDistinct(seatlist);
         }
       })
@@ -187,7 +185,6 @@ const Reservation = ({ userFrom, nowPlaying }) => {
 
   const countLeftSeats = (time, theater) => {
     let countAllSeats = theater % 2 === 1 ? 55 : 45;
-    // console.log("dddddd");
     let count = 0;
     Distinct &&
       Distinct.forEach(obj => {

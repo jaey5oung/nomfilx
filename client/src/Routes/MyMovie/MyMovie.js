@@ -10,7 +10,6 @@ import {
 import UserMovie from "./Sections/UserMovie";
 import { Empty, Result } from "antd";
 import CartPage from "../Product/CartPage/CartPage";
-// import Paypal from "../../utils/Paypal";
 import styled from "styled-components";
 
 const Button1 = styled.button`
@@ -178,7 +177,6 @@ function MyMovie(props) {
         )}
         <div style={{ textAlign: "right", paddingTop: "2%" }}>
           {ShowTotalProduct && (
-            // <Paypal onSuccess={transactionSuccess} Price={Total} />
             <Button1 variant="contained" color="primary" onClick={onKaKaoPay}>
               주문하기
             </Button1>

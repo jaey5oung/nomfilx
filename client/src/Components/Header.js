@@ -1,10 +1,11 @@
-import React from "react"
-import styled from "styled-components"
-import { withRouter, Link } from "react-router-dom"
-import Axios from "axios"
-import { Badge } from "antd"
-import { ShoppingCartOutlined } from "@ant-design/icons"
-import { useSelector } from "react-redux"
+import React from "react";
+import styled from "styled-components";
+import { withRouter, Link } from "react-router-dom";
+import Axios from "axios";
+import { Badge } from "antd";
+import { ShoppingCartOutlined } from "@ant-design/icons";
+import { useSelector } from "react-redux";
+import { LOCAL_SERVER } from "./Config";
 const Header = styled.header`
   position: fixed;
   top: 0;
@@ -54,7 +55,7 @@ const Item = styled.li`
   float: right;
   text-align: center;
   // border-bottom: 5px solid
-  //   ${(props) => (props.current ? "mediumslateblue" : "transparent")};
+  //   ${props => (props.current ? "mediumslateblue" : "transparent")};
   // transition: border-bottom 0.5s ease-in-out;
   // &:hover {
   //   background: mediumslateblue;
@@ -126,13 +127,13 @@ export default withRouter(
   (
     props //withRouter 때문에 props를 가질 수 있다.
   ) => {
-    const user = useSelector((state) => state.user)
-    window.addEventListener("scroll", handleScroll)
+    const user = useSelector(state => state.user);
+    window.addEventListener("scroll", handleScroll);
     const {
       location: { pathname },
     } = props
     const logoutHandler = () => {
-      Axios.get("/api/users/logout").then((response) => {
+      Axios.get("/api/users/logout").then(response => {
         if (response.data.success) {
           console.log(response.data)
           props.history.push("/sign-in")
@@ -206,8 +207,8 @@ export default withRouter(
                         }}
                         src={
                           user.userData.image
-                            ? `http://localhost:5000/${user.userData.image}`
-                            : "http://localhost:5000/uploads/default.png"
+                            ? `${LOCAL_SERVER}${user.userData.image}`
+                            : `${LOCAL_SERVER}uploads/default.png`
                         }
                         alt="haha"
                         fontColor="#e5e5e5"

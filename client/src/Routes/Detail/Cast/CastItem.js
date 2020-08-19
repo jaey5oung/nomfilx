@@ -1,4 +1,4 @@
-import React /*useState*/ from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { IMAGE_BASE_URL } from "../../../Components/Config";
@@ -41,7 +41,6 @@ const CastItem = ({ person }) => {
           ? `${person.name.substring(0, 8)}...`
           : person.name}
       </Name>
-      {/* {title.length > 18 ? `${title.substring(0, 8)}...` : title} */}
     </Box>
   );
 };

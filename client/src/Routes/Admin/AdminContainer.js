@@ -117,7 +117,7 @@ function AdminContainer() {
             <Route path="/productManage" component={Product} />
           </Content>
           <Footer style={{ textAlign: "center" }}>
-            Ant Design ©2016 Created by Ant UED
+            Movie App ©2020 Created by TEAM BONG JUN HO
           </Footer>
         </Layout>
       </Layout>

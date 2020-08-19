@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
+import { LOCAL_SERVER } from "../Components/Config";
 function FileUpload(props) {
   const [Images, setImages] = useState([]);
 
@@ -68,7 +69,7 @@ function FileUpload(props) {
           <div onClick={() => deleteHandler(image)} key={index}>
             <img
               style={{ minWidth: "300px", width: "300px", height: "240px" }}
-              src={`http://localhost:5000/${image}`}
+              src={`${LOCAL_SERVER}${image}`}
               alt=""
             />
           </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Rating from "../../../Components/Rating";
-
+import { IMAGE_BASE_URL } from "../../../Components/Config";
 const Chart = styled.div`
   float: bottom;
   width: 90%;
@@ -33,7 +33,7 @@ const PosterContainer = styled.div`
 `;
 
 const PosterImage = styled.div`
-  background-image: url(${(props) => props.bgUrl});
+  background-image: url(${props => props.bgUrl});
   width: 130px;
   height: 180px;
   background-size: cover;
@@ -45,7 +45,7 @@ const PosterImage = styled.div`
 
 const PosterTitle = styled.div`
   font-size: 15px;
-  color: #2E2E2E;
+  color: #2e2e2e;
   margin: 0 auto;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -56,7 +56,7 @@ const RatingWapper = styled.div`
 `;
 
 const PosterWrapper = styled.div`
-  background-color: #C9C9C9;
+  background-color: #c9c9c9;
   border: 1px solid #585858;
   width: 155px;
   height: 100%;
@@ -77,7 +77,7 @@ const RecentRating = ({ recent, user }) => {
   return (
     <Chart>
       <SectionTitle>
-      {user.userData && user.userData.name}님의 최근 별점 목록
+        {user.userData && user.userData.name}님의 최근 별점 목록
       </SectionTitle>
       {recent.length === 0 ? (
         <Nothing>
@@ -99,13 +99,15 @@ const RecentRating = ({ recent, user }) => {
               <PosterContainer key={index}>
                 <PosterWrapper>
                   <PosterImage
-                    bgUrl={`https://image.tmdb.org/t/p/w300${item.imageUrl}`}
+                    bgUrl={`${IMAGE_BASE_URL}w500${item.imageUrl}`}
                   />
                   <PosterTitle>
-                  {item.title.length > 11 ? `${item.title.substring(0, 11)}...` : item.title}
+                    {item.title.length > 11
+                      ? `${item.title.substring(0, 11)}...`
+                      : item.title}
                   </PosterTitle>
                   <RatingWapper>
-                    <Rating number={item.score} myColor="#2e2e2e"/>
+                    <Rating number={item.score} myColor="#2e2e2e" />
                   </RatingWapper>
                 </PosterWrapper>
               </PosterContainer>

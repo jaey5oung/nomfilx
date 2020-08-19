@@ -11,7 +11,7 @@ const Container = styled.div`
 `;
 
 const Text = styled.span`
-  color: ${(props) => props.color};
+  color: ${props => props.color};
 `;
 const Message = ({ text, color }) => (
   <Container>

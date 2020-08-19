@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 import Dropzone from "react-dropzone";
 import { PlusOutlined } from "@ant-design/icons";
 import Axios from "axios";
-
+import { LOCAL_SERVER } from "../../Components/Config";
 function SignUp(props) {
   const dispatch = useDispatch();
 
@@ -128,8 +128,8 @@ function SignUp(props) {
                       }}
                       src={
                         FilePath
-                          ? `http://localhost:5000/${FilePath}`
-                          : `http://localhost:5000/uploads/default.png`
+                          ? `${LOCAL_SERVER}${FilePath}`
+                          : `${LOCAL_SERVER}uploads/default.png`
                       }
                       alt="haha"
                       width="110px"
@@ -242,47 +242,3 @@ function SignUp(props) {
 }
 
 export default withRouter(SignUp);
-
-{
-  /* <Dropzone onDrop={onDrop} multiple={false} maxSize={800000000}>
-{({ getRootProps, getInputProps }) => (
-  <div
-    style={{
-      width: "6rem",
-      height: "6rem",
-      border: "1px solid black",
-
-      borderRadius: "20px",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      position: "relative",
-      top: "5px",
-      left: "5px",
-      margin: "0 auto",
-    }}
-    {...getRootProps()}
-  >
-    <input {...getInputProps()} />
-
-    <img
-      style={{
-        display: "flex",
-        borderRadius: "30%",
-        justifyContent: "center",
-      }}
-      src={
-        FilePath
-          ? `http://localhost:5000/${FilePath}`
-          : currentImage !== undefined
-          ? `http://localhost:5000/${currentImage}`
-          : `http://localhost:5000/uploads/default.png`
-      }
-      alt="haha"
-      width="110px"
-      height="110px"
-    />
-  </div>
-)}
-</Dropzone> */
-}

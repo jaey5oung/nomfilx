@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import MyScoreRating from "./MyScoreRating";
 import { Link } from "react-router-dom";
-
+import { IMAGE_BASE_URL } from "../../Components/Config";
 const Container = styled.div`
   font-size: 12px;
   min-height: 350px;
@@ -84,7 +84,7 @@ const MyScorePoster = ({
       <Image
         bgUrl={
           imageUrl
-            ? `https://image.tmdb.org/t/p/w300${imageUrl}`
+            ? `${IMAGE_BASE_URL}w300${imageUrl}`
             : "https://www.movienewz.com/img/films/poster-holder.jpg"
         }
       />

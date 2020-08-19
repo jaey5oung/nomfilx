@@ -24,6 +24,7 @@ import {
 import { useDispatch } from "react-redux";
 import { addToMovie } from "../../_actions/user_action";
 import Select from "react-select";
+import { IMAGE_BASE_URL, CLIENT } from "../../Components/Config";
 
 const PriceTag = styled.div`
   font-size: 20px;
@@ -276,7 +277,7 @@ function BookingAll({
       if (response.data.success) {
         alert("예매 성공");
 
-        window.location.href = "http://localhost:3000/mymovie";
+        window.location.href = `${CLIENT}mymovie`;
 
         //개인 영화 구매정보
         dispatch(addToMovie(response.data.doc._id));
@@ -375,7 +376,7 @@ function BookingAll({
         {/* <Nav> */}
         <InnerWrapper style={{ height: "300px", marginTop: "20px" }}>
           {/* <SideFlex> */}
-          <Cover bgImage={`https://image.tmdb.org/t/p/original${bgImage}`} />
+          <Cover bgImage={`${IMAGE_BASE_URL}original${bgImage}`} />
         </InnerWrapper>
 
         <InnerWrapper

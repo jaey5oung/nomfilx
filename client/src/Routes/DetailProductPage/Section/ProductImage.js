@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ImageGallery from "react-image-gallery";
+import { LOCAL_SERVER } from "../../../Components/Config";
 // import "./style.css";
 
 function ProductImage(props) {
@@ -8,10 +9,10 @@ function ProductImage(props) {
     if (props.detail.images && props.detail.images.length > 0) {
       let images = [];
 
-      props.detail.images.forEach((item) => {
+      props.detail.images.forEach(item => {
         images.push({
-          original: `http://localhost:5000/${item}`,
-          thumbnail: `http://localhost:5000/${item}`,
+          original: `${LOCAL_SERVER}${item}`,
+          thumbnail: `${LOCAL_SERVER}${item}`,
         });
       });
       setImages(images);
@@ -19,8 +20,8 @@ function ProductImage(props) {
   }, [props.detail]);
 
   return (
-    <div >
-      <ImageGallery items={Images}/>
+    <div>
+      <ImageGallery items={Images} />
     </div>
   );
 }

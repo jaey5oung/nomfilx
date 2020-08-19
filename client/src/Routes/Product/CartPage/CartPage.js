@@ -14,6 +14,7 @@ import {
 import Portlet from "../../MyMovie/Sections/Portlet";
 import PortletContent from "../../MyMovie/Sections/PortletContent";
 import styles from "../../MyMovie/Sections/styles";
+import { LOCAL_SERVER } from "../../../Components/Config";
 
 class CartPage extends Component {
   state = {
@@ -25,11 +26,11 @@ class CartPage extends Component {
     products: [],
   };
 
-  handleChangePage = (page) => {
+  handleChangePage = page => {
     this.setState({ page });
   };
 
-  handleChangeRowsPerPage = (event) => {
+  handleChangeRowsPerPage = event => {
     this.setState({ rowsPerPage: event.target.value });
   };
 
@@ -39,10 +40,10 @@ class CartPage extends Component {
     const { rowsPerPage, page } = this.state;
     const rootClassName = classNames(classes.root, className);
 
-    const renderCartImage = (images) => {
+    const renderCartImage = images => {
       if (images.length > 0) {
         let image = images[0];
-        return `http://localhost:5000/${image}`;
+        return `${LOCAL_SERVER}${image}`;
       }
     };
 
@@ -73,7 +74,7 @@ class CartPage extends Component {
             <TableBody>
               {products
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((product) => (
+                .map(product => (
                   <TableRow
                     className={classes.tableRow}
                     hover

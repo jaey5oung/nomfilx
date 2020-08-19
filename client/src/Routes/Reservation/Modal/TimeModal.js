@@ -4,7 +4,6 @@ import styled from "styled-components";
 import Popup from "reactjs-popup";
 import "../style.css";
 import "react-modern-calendar-datepicker/lib/DatePicker.css";
-import Paypal from "../../../utils/Paypal";
 import {
   Continents,
   SeatA,
@@ -16,7 +15,7 @@ import {
   SeatG,
 } from "./Context";
 import Reservation from "../../Booking/Reservation";
-
+import { CLIENT } from "../../../Components/Config";
 const Button = styled.button`
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -35,7 +34,7 @@ const Button = styled.button`
 const Cover = styled.div`
   width: 95%;
   height: 60%;
-  background-image: url(${(props) => props.bgImage});
+  background-image: url(${props => props.bgImage});
 
   background-position: center center;
 
@@ -165,7 +164,7 @@ const TimeModal = ({
   // };
 
   //seat 색 변경
-  const onSeatChange = (e) => {
+  const onSeatChange = e => {
     if (
       e.target.classList.contains("seat") &&
       !e.target.classList.contains("occupied")
@@ -176,13 +175,13 @@ const TimeModal = ({
     }
   };
 
-  const onCount = (event) => {
+  const onCount = event => {
     setContinent(event.currentTarget.value);
     setPrice(event.currentTarget.value * 1);
   };
 
   //결제후 DB저장
-  const transactionSuccess = (data) => {
+  const transactionSuccess = data => {
     if (!selectDay || !theaters || !time || !id || !title) {
       return alert("모든 값을 넣어주셔야 합니다.");
     }
@@ -199,10 +198,10 @@ const TimeModal = ({
       price: Price,
     };
 
-    axios.post("/api/reservation", body).then((response) => {
+    axios.post("/api/reservation", body).then(response => {
       if (response.data.success) {
         alert("예매 성공");
-        window.location.href = "http://localhost:3000/";
+        window.location.href = `${CLIENT}`;
       } else {
         alert("예매 실패");
         return false;
@@ -212,7 +211,7 @@ const TimeModal = ({
 
   //예매된 좌석 확인
   const onFindSeats = () => {
-    axios.post("/api/reservation/findSeat").then((response) => {
+    axios.post("/api/reservation/findSeat").then(response => {
       if (response.data.success) {
         alert("찾기 성공");
 
@@ -225,7 +224,7 @@ const TimeModal = ({
   };
 
   //좌석과 인원 맞추기
-  const onCompareSeat = (event) => {
+  const onCompareSeat = event => {
     if (Continent < Seat.length + 1) {
       //인원보다 좌석지정이 많을경우
       alert("좌석 지정이 완료 되었습니다.");

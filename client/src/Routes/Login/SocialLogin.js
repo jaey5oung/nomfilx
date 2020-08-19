@@ -4,6 +4,7 @@ import KaKaoLogin from "react-kakao-login";
 import Axios from "axios";
 import { withRouter } from "react-router-dom";
 import styled from "styled-components";
+import { GOOGLE_KEY, GOOGLE_LOGO, KAKAO_KEY } from "../../Components/Config";
 const Container = styled.div`
   display: flex;
   // margin:0;
@@ -74,7 +75,7 @@ function SocialLogin(props) {
         cookiePolicy={"single_host_origin"}    
       /> */}
         <GoogleLogin
-          clientId="929257267887-jabje0s2v9gdvfrm1avh5qr1q63j9p91.apps.googleusercontent.com"
+          clientId={GOOGLE_KEY}
           render={renderProps => (
             <button
               className="c-flex"
@@ -86,7 +87,7 @@ function SocialLogin(props) {
               }}
             >
               <img
-                src="https://img0.yna.co.kr/etc/inner/KR/2015/09/02/AKR20150902004600091_07_i_P4.jpg"
+                src={GOOGLE_LOGO}
                 style={{ width: "100%", height: "45px", borderRadius: "100%" }}
                 alt="Google Logo"
               />
@@ -100,7 +101,7 @@ function SocialLogin(props) {
         />
         <KaKaoBtn
           //styled component 통해 style을 입혀 줄 예정
-          jsKey={"4835800b3d8f6f4b36c85d157690121c"}
+          jsKey={KAKAO_KEY}
           //카카오에서 할당받은 jsKey를 입력
           buttonText="Kakao"
           //로그인 버튼의 text를 입력

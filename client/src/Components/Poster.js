@@ -2,27 +2,28 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { IMAGE_BASE_URL } from "./Config";
 // import Ratingg from '../Components/Rating';
 const Container = styled.div`
-font-size: 9px;
-min-height: 350px;
+  font-size: 9px;
+  min-height: 350px;
 `;
 const Image = styled.div`
-  background-image: url(${(props) => props.bgUrl});
+  background-image: url(${props => props.bgUrl});
   width: 200px;
   height: 300px;
   margin-right: 20px;
-  background-size:cover;
+  background-size: cover;
   border-radius: 4px;
-  transition:all 0.1s linear 0s;  
+  transition: all 0.1s linear 0s;
 `;
 const Rating = styled.span`
-font-size: 15px;
-    position: absolute;
-    bottom: 5px;
-    right: 25px;
-    opacity: 0;
-    transition: all 0.1s linear 0s;
+  font-size: 15px;
+  position: absolute;
+  bottom: 5px;
+  right: 25px;
+  opacity: 0;
+  transition: all 0.1s linear 0s;
 `;
 const ImageContainer = styled.div`
   margin-bottom: 5px;
@@ -46,7 +47,7 @@ const ImageContainer = styled.div`
     }
   }
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -63,15 +64,14 @@ const ImageContainer = styled.div`
   }
 `;
 const Title = styled.span`
- /* border: 5px solid green;  */
-  font-size:18px;
+  /* border: 5px solid green;  */
+  font-size: 18px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   // align-items:flex-start
-  align-items:center;
+  align-items: center;
   padding: 1.5rem 3rem;
-  
 `;
 const Year = styled.span`
   // font-size: 10px;
@@ -81,7 +81,7 @@ const Year = styled.span`
   align-items: center;
   margin-bottom: 0.5rem;
   color: var(--color-primary);
-  margin-left:40px;
+  margin-left: 40px;
 `;
 const RatingsWrapper = styled.div`
   position: relative;
@@ -93,15 +93,15 @@ const RatingsWrapper = styled.div`
   }
 `;
 const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
-  <Link to={isMovie ? `/movie/${id}` : `/show/${id}`}>
+  <Link to={`/movie/${id}`}>
     <Container>
       <ImageContainer>
         <Image
-         bgUrl={
-          imageUrl
-            ? `https://image.tmdb.org/t/p/w300${imageUrl}`
-            : "https://www.movienewz.com/img/films/poster-holder.jpg"
-        }
+          bgUrl={
+            imageUrl
+              ? `${IMAGE_BASE_URL}w500${imageUrl}`
+              : "https://www.movienewz.com/img/films/poster-holder.jpg"
+          }
         />
         <Rating>
           <span role="img" aria-label="rating">
@@ -111,13 +111,11 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
         </Rating>
       </ImageContainer>
       <RatingsWrapper>
-      <Title>
-        {title.length > 8 ? `${title.substring(0, 4)}...` : title}
-      </Title>
-      <Year>
-        {/* <Ratingg number = {rating/2}/>         */}
-       </Year>
-       </RatingsWrapper>
+        <Title>
+          {title.length > 8 ? `${title.substring(0, 4)}...` : title}
+        </Title>
+        <Year>{/* <Ratingg number = {rating/2}/>         */}</Year>
+      </RatingsWrapper>
     </Container>
   </Link>
 );

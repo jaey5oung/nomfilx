@@ -35,18 +35,6 @@ const Rating = props => {
       });
   };
 
-  // const giveStarRating=()=>{
-  //   const body = {
-  //     movieId: props.id,
-  //     movieTitle: props.title,
-  //     myScore: value,
-  //   };
-  //   axios.post("/api/myscore/giveStarRating", body).then((response) => {
-  //     const res = response.request.response
-  //     console.log("response:", res);//user정보, id 등
-  //   });
-  // }
-
   const onClickHandler = value => {
     setValue(value);
     //별점 추가
