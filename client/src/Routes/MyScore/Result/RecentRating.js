@@ -99,7 +99,7 @@ const RecentRating = ({ recent, user }) => {
               <PosterContainer key={index}>
                 <PosterWrapper>
                   <PosterImage
-                    bgUrl={`${IMAGE_BASE_URL}w500${item.imageUrl}`}
+                    bgUrl={`${IMAGE_BASE_URL}original${item.imageUrl}`}
                   />
                   <PosterTitle>
                     {item.title.length > 11

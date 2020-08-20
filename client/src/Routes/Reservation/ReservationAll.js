@@ -56,6 +56,9 @@ const Button2 = styled.button`
     background: mediumslateblue;
     cursor: pointer;
   }
+  &:focus {
+    background: mediumslateblue;
+  }
 `;
 const Wrapper = styled.div`
   margin: 0 auto;
@@ -186,12 +189,8 @@ const ReservationAll = ({ userFrom, nowPlaying }) => {
           count = count + obj.continent;
         }
       });
-    let myColor = countAllSeats - count > 10 ? "black" : "red";
-    return (
-      <span style={{ color: myColor, fontWeight: "500" }}>
-        {countAllSeats - count}
-      </span>
-    );
+      let myColor=(countAllSeats-count)>10? "black" : "red"; 
+      return <span style={{ color: myColor, fontWeight: "500" }}>{countAllSeats===count ? `매진` : `${countAllSeats - count}석`}</span>;
   };
 
   return (
@@ -239,18 +238,16 @@ const ReservationAll = ({ userFrom, nowPlaying }) => {
               </Title>
             </TitleWrapper>
             {Continents1.map((item, index) => (
-              <Button2
-                key={index}
-                style={{ color: "black" }}
-                onClick={(props) => {
-                  setTheater(key - 1);
-                  onTime(item.value);
-                  props.currentTarget.style.backgroundColor = "mediumslateblue";
-                }}
-              >
-                {item.label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                {countLeftSeats(item.value, key - 1)}석
-              </Button2>
+                <Button2
+                  key={index}
+                  style={{ color: "black" }}
+                  onClick={() => {
+                    setTheater(key - 1);
+                    onTime(item.value);
+                  }}
+                >
+                    {item.label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{countLeftSeats(item.value, key - 1)}
+                </Button2>
             ))}
             <TitleWrapper>
               <Title>
@@ -267,8 +264,7 @@ const ReservationAll = ({ userFrom, nowPlaying }) => {
                   onTime(item.value);
                 }}
               >
-                {item.label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-                {countLeftSeats(item.value, key)}석
+                  {item.label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{countLeftSeats(item.value, key)}
               </Button2>
             ))}
           </InnerWrapper>

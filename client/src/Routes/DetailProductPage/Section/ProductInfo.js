@@ -10,6 +10,7 @@ function ProductInfo(props) {
   const clickHandler = () => {
     //카트에 넣으면 필요한 정보를 넣어준다.
     dispatch(addToCart(props.detail._id));
+    alert("장바구니에 상품이 담겼습니다.")
   };
   return (
     <div style={{ height:"50%", marginLeft:"5%", marginTop:"10%"}}>

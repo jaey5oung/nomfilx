@@ -9,7 +9,7 @@ import { green } from "@material-ui/core/colors";
 const useStyles = makeStyles(theme => ({
   root: {
     height: "100%",
-    backgroundColor: "#8181F7",
+    backgroundColor: "#93BFB9",
     color: "#FFF",
   },
   content: {

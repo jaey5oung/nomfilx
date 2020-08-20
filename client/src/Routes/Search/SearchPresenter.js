@@ -6,16 +6,13 @@ import Loader from "Components/Loader";
 import Message from "../../Components/Message";
 import Poster from "./SearchPoster";
 import SearchSection from "./SearchSection";
-
 const Container = styled.div`
   padding: 20px;
 `;
-
 const Form = styled.form`
   margin-bottom: 50px;
   width: 100%;
 `;
-
 const Input = styled.input`
 all: unset;
     width: 100%;
@@ -25,7 +22,6 @@ all: unset;
     padding: 5px 0px;
     background: rgba(255, 255, 255, 0.1);
 `;
-
 const SearchPresenter = ({
   movieResults,
   loading,
@@ -73,7 +69,6 @@ const SearchPresenter = ({
     )}
   </Container>
 );
-
 SearchPresenter.propTypes = {
   movieResults: PropTypes.array,
   tvResults: PropTypes.array,
@@ -83,5 +78,4 @@ SearchPresenter.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   updateTerm: PropTypes.func.isRequired
 };
-
 export default SearchPresenter;

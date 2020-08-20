@@ -79,7 +79,7 @@ const MyScorePoster = ({
       <Image
         bgUrl={
           imageUrl
-            ? `${IMAGE_BASE_URL}w300${imageUrl}`
+            ? `${IMAGE_BASE_URL}original${imageUrl}`
             : "https://www.movienewz.com/img/films/poster-holder.jpg"
         }
       />

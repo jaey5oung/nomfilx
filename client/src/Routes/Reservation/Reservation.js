@@ -53,9 +53,13 @@ const Button2 = styled.button`
   margin: 8px;
   padding: 5px 12px 5px 12px;
   border: 1px solid gray;
+  outline: none;
   &:hover {
     background: mediumslateblue;
     cursor: pointer;
+  }
+  &:focus {
+    background: mediumslateblue;
   }
 `;
 const Wrapper = styled.div`
@@ -76,22 +80,21 @@ const InnerWrapper = styled.div`
   min-height: 200px;
   max-width: 450px;
 `;
-
 const Continents1 = [
-  { key: 1, label: "11:00", value: "11:00" },
-  { key: 2, label: "13:00", value: "13:00" },
-  { key: 3, label: "15:00", value: "15:00" },
-  { key: 4, label: "17:00", value: "17:00" },
-  { key: 5, label: "19:00", value: "19:00" },
-  { key: 6, label: "21:00", value: "21:00" },
+  { key: 1, label: "11:00", value: "11:00", check: false },
+  { key: 2, label: "13:00", value: "13:00", check: false },
+  { key: 3, label: "15:00", value: "15:00", check: false },
+  { key: 4, label: "17:00", value: "17:00", check: false },
+  { key: 5, label: "19:00", value: "19:00", check: false },
+  { key: 6, label: "21:00", value: "21:00", check: false },
 ];
 const Continents2 = [
-  { key: 1, label: "10:00", value: "10:00" },
-  { key: 2, label: "12:00", value: "12:00" },
-  { key: 3, label: "14:00", value: "14:00" },
-  { key: 4, label: "16:00", value: "16:00" },
-  { key: 5, label: "18:00", value: "18:00" },
-  { key: 6, label: "20:00", value: "20:00" },
+  { key: 1, label: "10:00", value: "10:00", check: false },
+  { key: 2, label: "12:00", value: "12:00", check: false },
+  { key: 3, label: "14:00", value: "14:00", check: false },
+  { key: 4, label: "16:00", value: "16:00", check: false },
+  { key: 5, label: "18:00", value: "18:00", check: false },
+  { key: 6, label: "20:00", value: "20:00", check: false },
 ];
 const Reservation = ({ userFrom, nowPlaying }) => {
   const movieList = nowPlaying.map((movie, index) => ({
@@ -116,9 +119,7 @@ const Reservation = ({ userFrom, nowPlaying }) => {
   const [theater, setTheater] = useState(0);
   const [key, setKey] = useState(0);
   const [Distinct, setDistinct] = useState([]);
-  const [buttonState, setButtonState] = useState(false);
-  // const [compareButtonState, setCompareButtonState] = useState(true);
-
+  const [select, setSelect] = useState([]);
   const renderCustomInput = ({ ref }) => (
     <input
       readOnly
@@ -151,6 +152,11 @@ const Reservation = ({ userFrom, nowPlaying }) => {
     setID(event.id);
     setVisible(true);
     setKey(event.key); //영화관 1관 2관 3관 .... 정하기 위해 씀
+    let arr = [];
+    Continents1.forEach(item => {
+      arr.push(false);
+    });
+    setSelect(arr);
   };
 
   useEffect(() => {
@@ -187,27 +193,8 @@ const Reservation = ({ userFrom, nowPlaying }) => {
           count = count + obj.continent;
         }
       });
-    let myColor = countAllSeats - count > 10 ? "#2e2e2e" : "red";
-    return (
-      <span style={{ color: myColor, fontWeight: "500" }}>
-        {countAllSeats - count}석
-      </span>
-    );
-  };
-
-  const setEffect = (props) => {
-    buttonState ? buttonStateFalse(props) : buttonStateTrue(props);
-  };
-
-  const buttonStateFalse = (props) => {
-    setButtonState(false);
-    props.currentTarget.style.backgroundColor = "mediumslateblue";
-    props.currentTarget.style.outline = "none";
-  };
-  const buttonStateTrue = (props) => {
-    setButtonState(true);
-    props.currentTarget.style.backgroundColor = "white";
-    props.currentTarget.style.outline = "none";
+    let myColor = (countAllSeats - count) > 10 ? "#2e2e2e" : "red";
+    return <span style={{ color: myColor, fontWeight: "500" }}>{countAllSeats===count ? `매진` : `${countAllSeats - count}석`}</span>;
   };
 
   return (
@@ -256,12 +243,10 @@ const Reservation = ({ userFrom, nowPlaying }) => {
             </TitleWrapper>
             {Continents1.map((item, index) => (
               <Button2
-                id="timeButton"
                 key={index}
-                onClick={(props) => {
+                onClick={() => {
                   setTheater(key - 1);
                   onTime(item.value);
-                  setEffect(props);
                 }}
               >
                 {item.label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -280,9 +265,6 @@ const Reservation = ({ userFrom, nowPlaying }) => {
                 onClick={(props) => {
                   setTheater(key);
                   onTime(item.value);
-                  buttonState
-                    ? buttonStateFalse(props)
-                    : buttonStateTrue(props);
                 }}
               >
                 {item.label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;

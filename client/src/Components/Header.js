@@ -138,7 +138,7 @@ export default withRouter(
                 <img
                   src={require("./images/logo.png")}
                   alt="logo"
-                  style={{ width: "160%", margin: "0 auto", marginTop: "30px" }}
+                  style={{ width: "70%", margin: "0 auto", marginTop: "0px" }}
                 />
               </SLink>
             </Item>

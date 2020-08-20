@@ -129,29 +129,39 @@ function BookingAll({
         arr = [];
       }
       arr = [...Seat];
-      
+
       let temp;
       let sub = subCount;
       //arr 빈배열에 선택된 수(count) 만큼 push하는 과정
       unselected.forEach((seat, index) => {
         if (seat.innerHTML === e.target.textContent) {
-          arr.push(seat.innerHTML);
-          sub = sub + 1;
+          if (!Seat.includes(seat.innerHTML)) {
+            arr.push(seat.innerHTML);
+            sub = sub + 1;
+          }
           setSubCount(subCount => sub);
           temp = index;
-        } else if (seat.className === "seat occupied") {
-        } else if (
-          index > temp &&
-          Continent - sub > 0 &&
-          index === unselected.length - 1
-        ) {
-          arr.push(seat.innerHTML);
-          sub = sub + 1;
-          setSubCount(subCount => sub);
-        } else if (index > temp && Continent - sub > 0) {
-          arr.push(seat.innerHTML);
-          sub = sub + 1;
-          setSubCount(subCount => sub);
+        } else {
+          if (seat.className === "seat occupied") {
+            // 그냥 skip
+          } else if (
+            index > temp &&
+            Continent - sub > 0 &&
+            index === unselected.length - 1
+          ) {
+            if (!Seat.includes(seat.innerHTML)) {
+              arr.push(seat.innerHTML);
+              sub = sub + 1;
+            }
+            setSubCount(subCount => sub);
+          } else if (index > temp && Continent - sub > 0) {
+            if (!Seat.includes(seat.innerHTML)) {
+              arr.push(seat.innerHTML);
+              sub = sub + 1;
+            }
+
+            setSubCount(subCount => sub);
+          }
         }
       });
 
@@ -303,9 +313,10 @@ function BookingAll({
         <InnerWrapper
           style={{
             height: "200px",
+            width:"250px",
             display: "flex",
             flexDirection: "column",
-            fontSize: "13px",
+            fontSize: "17px",
             padding: "10px",
             color: "#D8D8D8",
           }}

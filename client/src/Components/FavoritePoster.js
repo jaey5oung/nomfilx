@@ -30,7 +30,7 @@ const Container = styled.div`
   width: 200px;
 `;
 const Image = styled.div`
-  background-image: url(${(props) => props.bgUrl});
+  background-image: url(${props => props.bgUrl});
   width: 200px;
   height: 300px;
   margin-right: 20px;
@@ -91,7 +91,15 @@ const Title = styled.span`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 0rem;
+`;
+const RatingContainer = styled.div`
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0rem;
 `;
 const Year = styled.span`
   display: flex;
@@ -116,8 +124,16 @@ const DelBtnContainer = styled.div`
   text-align: center;
 `;
 
-const FavoritePoster = ({ onClickDelete, id, imageUrl, title, rating, year, isMovie = false }) => {
-  const classes = useStyles()
+const FavoritePoster = ({
+  onClickDelete,
+  id,
+  imageUrl,
+  title,
+  rating,
+  year,
+  isMovie = false,
+}) => {
+  const classes = useStyles();
   return (
     <Container>
       <Link to={`/movie/${id}`}>
@@ -125,7 +141,7 @@ const FavoritePoster = ({ onClickDelete, id, imageUrl, title, rating, year, isMo
           <Image
             bgUrl={
               imageUrl
-                ? `${IMAGE_BASE_URL}w500${imageUrl}`
+                ? `${IMAGE_BASE_URL}original${imageUrl}`
                 : "https://www.movienewz.com/img/films/poster-holder.jpg"
             }
           />
@@ -140,12 +156,10 @@ const FavoritePoster = ({ onClickDelete, id, imageUrl, title, rating, year, isMo
       </Link>
       <RatingsWrapper>
         <Title>
-          {title.length > 18 ? `${title.substring(0, 8)}...` : title}
+          {title.length > 12 ? `${title.substring(0, 7)}...` : title}
         </Title>
-        <Year>
-          {/* <Ratingg number={rating / 2} myColor="white" /> */}
-        </Year>
       </RatingsWrapper>
+
       <DelBtnContainer>
         <Button
           variant="contained"

@@ -79,7 +79,15 @@ class UserMovie extends Component {
                       {movie.theater}관
                     </TableCell>
                     <TableCell className={classes.tableCell}>
-                      {movie.seat ? movie.seat.sort() : "not found"}
+                      {movie.seat ? movie.seat
+                      .sort()
+                      .map((seat, index) => {
+                    if (index < movie.seat.length - 1) {
+                      return seat + ", ";
+                    } else {
+                      return seat;
+                    }
+                  }) : "not found"}
                     </TableCell>
                     <TableCell className={classes.tableCell}>
                       {movie.selectDay[0].day}/{movie.selectDay[0].month}/

@@ -141,8 +141,8 @@ function DashBoard() {
         borderWidth: 3,
         hoverBorderWidth: 4,
         backgroundColor: [
-          "rgba(238, 102, 121, 1)",
-          "rgba(98, 181, 229, 1)",
+          "rgba(202, 228, 252)",
+          "rgba(244, 176, 208)",
           "rgba(255, 198, 0, 1)",
         ],
         fill: true,
@@ -185,8 +185,8 @@ function DashBoard() {
         label: "My First dataset",
         fill: false,
         lineTension: 0.1,        
-        backgroundColor: "mediumslateblue",        
-        borderColor: "mediumslateblue",
+        backgroundColor: "#4A8C84",        
+        borderColor: "#4A8C84",
         borderCapStyle: "butt",
         borderDash: [],
         borderDashOffset: 0.0,
@@ -303,7 +303,7 @@ function DashBoard() {
         >
           <div
             style={{
-              margin: "3%",
+              marginTop: "15%",
               marginLeft: "0%",              
               padding: "1%",
               width: "100%",
@@ -312,12 +312,12 @@ function DashBoard() {
           >
             <Doughnut
               style={{
-                marginTop:"50%",
+                marginTop:"100px",
               }}
               options={{
                 legend: {
                   display: true,
-                  position: "right",
+                  position: "bottom",
                   marginTop:"50%",                  
                 },
               }}

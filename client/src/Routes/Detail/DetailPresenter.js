@@ -28,7 +28,7 @@ const Backdrop = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
-  background-image: url(${(props) => props.bgImage});
+  background-image: url(${props => props.bgImage});
   background-position: center center;
   background-size: cover;
   filter: blur(0px);
@@ -46,7 +46,7 @@ const Content = styled.div`
 
 const Cover = styled.div`
   width: 30%;
-  background-image: url(${(props) => props.bgImage});
+  background-image: url(${props => props.bgImage});
   background-position: center center;
   background-size: cover;
   height: 100%;
@@ -115,7 +115,7 @@ const Heading = styled.h3`
   font-size: 1.4rem;
   margin-top: 10px;
   color: white;
-  @media ${(props) => props.theme.mediaQueries.medium} {
+  @media ${props => props.theme.mediaQueries.medium} {
     font-size: 1.2rem;
   }
 `;
@@ -124,7 +124,7 @@ const ButtonsWrapper = styled.div`
   margin-top: -73px;
   display: flex;
   align-items: center;
-  @media ${(props) => props.theme.mediaQueries.small} {
+  @media ${props => props.theme.mediaQueries.small} {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -189,11 +189,6 @@ const DetailPresenter = ({
               movieId={parseInt(result.id)}
               userFrom={localStorage.getItem("userId")}
             />
-
-            {/* <RatingsWrapper>
-              <Rating number={result.vote_average / 2} />
-              <RatingNumber>{result.vote_average}</RatingNumber>
-            </RatingsWrapper> */}
           </ItemContainer>
 
           <Overview>{result.overview}</Overview>

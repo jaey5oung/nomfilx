@@ -13,6 +13,7 @@ import Portlet from "../../MyMovie/Sections/Portlet";
 import PortletContent from "../../MyMovie/Sections/PortletContent";
 import styles from "../../MyMovie/Sections/styles";
 import { LOCAL_SERVER } from "../../../Components/Config";
+import { Helmet } from "react-helmet";
 
 class CartPage extends Component {
   state = {
@@ -45,6 +46,10 @@ class CartPage extends Component {
     };
 
     return (
+      <>
+      <Helmet>
+      <title>Cart | Nomflix</title>
+    </Helmet>
       <Portlet className={rootClassName} style={{ backgroundColor: "#2D2D2D" }}>
         <PortletContent noPadding>
           <Table>
@@ -129,6 +134,7 @@ class CartPage extends Component {
           />
         </PortletContent>
       </Portlet>
+      </>
     );
   }
 }

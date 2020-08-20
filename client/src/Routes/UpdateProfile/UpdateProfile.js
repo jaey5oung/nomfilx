@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react"
-import { Typography, Form, Input } from "antd"
-
-import Button from "@material-ui/core/Button"
-import Dropzone from "react-dropzone"
-import Axios from "axios"
-import { withRouter } from "react-router-dom"
-import { LOCAL_SERVER } from "../../Components/Config"
-import "antd/dist/antd.css"
-
-const { Title } = Typography
+import React, { useState, useEffect } from "react";
+import { Typography, Form, Input } from "antd";
+import Button from "@material-ui/core/Button";
+import Dropzone from "react-dropzone";
+import Axios from "axios";
+import { withRouter } from "react-router-dom";
+import { LOCAL_SERVER } from "../../Components/Config";
+import "antd/dist/antd.css";
+import { Helmet } from "react-helmet";
+const { Title } = Typography;
 const formItemLayout = {
   labelCol: {
     span: 6,
@@ -16,18 +15,16 @@ const formItemLayout = {
   wrapperCol: {
     span: 14,
   },
-}
-
+};
 function UpdateProfile(props) {
-  const [updatePasswordConfirm, setUpdatePasswordConfirm] = useState("")
-  const [updatePassword, setUpdatePassword] = useState("")
-  const [currentPassword, setCurrentPassword] = useState("")
-  const [FilePath, setFilePath] = useState("")
-  const [currentEmail, setCurrentEmail] = useState("")
-  const [currentName, setCurrentName] = useState("")
-  const [currentImage, setCurrentImage] = useState("")
-  const [UpdateName, setUpdateName] = useState("")
-
+  const [updatePasswordConfirm, setUpdatePasswordConfirm] = useState("");
+  const [updatePassword, setUpdatePassword] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [FilePath, setFilePath] = useState("");
+  const [currentEmail, setCurrentEmail] = useState("");
+  const [currentName, setCurrentName] = useState("");
+  const [currentImage, setCurrentImage] = useState("");
+  const [UpdateName, setUpdateName] = useState("");
   useEffect(() => {
     Axios.post("/api/users/getUserInfo", {
       userId: localStorage.getItem("userId"),
@@ -39,65 +36,68 @@ function UpdateProfile(props) {
       } else {
         alert("user 정보를 갖고오는데 실패했습니다.")
       }
-    })
-  }, [])
-
-  const onDrop = (files) => {
-    let formData = new FormData()
+    });
+  }, []);
+  const onDrop = files => {
+    let formData = new FormData();
     const config = {
       header: { "content-type": "multipart/form-data" },
-    }
-    formData.append("file", files[0])
-
-    Axios.post("/api/image/uploadfiles", formData, config).then((response) => {
+    };
+    formData.append("file", files[0]);
+    Axios.post("/api/image/uploadfiles", formData, config).then(response => {
       if (response.data.success) {
         setFilePath(response.data.filePath)
       } else {
         alert("failed to save the video in server")
       }
-    })
-  }
+    });
+  };
+  const handleChangeCurrentName = event => {
+    setUpdateName(event.currentTarget.value);
+  };
 
-  const handleChangeCurrentName = (event) => {
-    setUpdateName(event.currentTarget.value)
-  }
+  const handleChangeCurrentPassword = event => {
+    setCurrentPassword(event.currentTarget.value)
+  };
 
-  const handleChangeUpdatePassword = (event) => {
-    setUpdatePassword(event.currentTarget.value)
-  }
-
-  const handleChangeUpdatePasswordConfirm = (event) => {
-    setUpdatePasswordConfirm(event.currentTarget.value)
-  }
-
-  const onSubmit = (event) => {
-    event.preventDefault() //페이지 refresh 방지
+  const handleChangeUpdatePassword = event => {
+    setUpdatePassword(event.currentTarget.value);
+  };
+  const handleChangeUpdatePasswordConfirm = event => {
+    setUpdatePasswordConfirm(event.currentTarget.value);
+  };
+  const onSubmit = event => {
+    if (currentEmail.includes("(google)") || currentEmail.includes("(kakao)")) {
+      alert("소셜 계정입니다!");
+    }
+    if(currentPassword === ""){
+      alert("현재 비밀번호를 입력하세요")
+    }
+    event.preventDefault(); //페이지 refresh 방지
     let variable = {
       id: window.localStorage.getItem("userId"),
       password: currentPassword,
       newName: UpdateName !== "" ? UpdateName : currentName,
       newPassword: updatePassword !== "" ? updatePassword : currentPassword,
       newImage: FilePath !== "" ? FilePath : currentImage,
-    }
-    if (currentEmail.includes("(google)") || currentEmail.includes("(kakao)")) {
-      alert("소셜 계정입니다!")
-    }
+    };
     if (updatePassword === updatePasswordConfirm) {
       Axios.post("/api/users/updateProfile", variable).then((response) => {
         if (response.data.success) {
           alert("변경되었습니다.")
           props.history.push("/")
         } else {
-          alert("잘못된 입력입니다.")
         }
       })
     } else {
       alert("비밀번호가 일치하지 않습니다!")
     }
-  }
-
+  };
   return (
     <>
+    <Helmet>
+        <title>MyPage | Nomflix</title>
+      </Helmet>
       <div>
         <Form
           {...formItemLayout}
@@ -122,7 +122,6 @@ function UpdateProfile(props) {
                   width: "10rem",
                   height: "10rem",
                   border: "1px solid black",
-
                   borderRadius: "20px",
                   display: "flex",
                   alignItems: "center",
@@ -169,7 +168,6 @@ function UpdateProfile(props) {
           >
             <Input value={currentEmail} disabled />
           </Form.Item>
-
           <Form.Item
             style={{
               backgroundColor: "mediumslateblue",
@@ -185,6 +183,34 @@ function UpdateProfile(props) {
               placeholder={currentName}
               value={UpdateName}
               onChange={handleChangeCurrentName}
+            />
+          </Form.Item>
+          <Form.Item
+            style={{ color: "white" }}
+            label="현 비밀번호"
+            hasFeedback
+            validateStatus="success"
+          >
+            <Input
+              placeholder="현재 비밀번호 입력"
+              value={currentPassword}
+              onChange={handleChangeCurrentPassword}
+              type="password"
+              id="currentPassword"
+            />
+          </Form.Item>
+          <Form.Item
+            style={{ color: "white" }}
+            label="현 비밀번호"
+            hasFeedback
+            validateStatus="success"
+          >
+            <Input
+              placeholder="현재 비밀번호 입력"
+              value={currentPassword}
+              onChange={handleChangeCurrentPassword}
+              type="password"
+              id="currentPassword"
             />
           </Form.Item>
 
@@ -207,7 +233,6 @@ function UpdateProfile(props) {
               id="newPassword"
             />
           </Form.Item>
-
           <Form.Item
             style={{
               backgroundColor: "mediumslateblue",
@@ -230,7 +255,6 @@ function UpdateProfile(props) {
           </Form.Item>
           <br />
           <br />
-
           <Button
             style={{
               backgroundColor: "mediumslateblue",
@@ -248,5 +272,4 @@ function UpdateProfile(props) {
     </>
   )
 }
-
-export default withRouter(UpdateProfile)
+export default withRouter(UpdateProfile);

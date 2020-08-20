@@ -158,7 +158,7 @@ function MyMovie(props) {
           >
             <h4 style={{ color: "#f7f7f7" }}>
               총 금액:
-              <span style={{ color: "red" }}>{Total}</span>
+              <span style={{ color: "#f7f7f7" }}>{Total}</span>
               <b>원</b>
             </h4>
           </div>

@@ -5,6 +5,7 @@ import Meta from "antd/lib/card/Meta";
 import ImageSlider from "../../utils/ImageSlider";
 import SearchFeature from "./Section/SearchFeature";
 import styled from "styled-components";
+import { Helmet } from "react-helmet";
 
 const Button1 = styled.button`
   color: #9c88ff;
@@ -107,6 +108,10 @@ function Product() {
   };
 
   return (
+    <>
+    <Helmet>
+      <title>Product | Nomflix</title>
+    </Helmet>
     <div style={{ width: "75%", margin: "3rem auto" }}>
       <div
         style={{
@@ -152,6 +157,7 @@ function Product() {
         </div>
       )}
     </div>
+    </>
   );
 }
 

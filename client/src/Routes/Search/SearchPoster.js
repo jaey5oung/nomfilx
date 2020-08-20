@@ -3,23 +3,20 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { IMAGE_BASE_URL } from "../../Components/Config";
-
 const Container = styled.div`
   font-size: 30px;
-  
   min-height: 350px;
   min-width: 250px;
   align-content: center;
 `;
 const Image = styled.div`
-  background-image: url(${(props) => props.bgUrl});
+  background-image: url(${props => props.bgUrl});
   width: 280px;
   height: 410px;
   margin-right: 20px;
   background-size: cover;
   transition: all 0.1s linear 0s;
 `;
-
 const ImageContainer = styled.div`
   margin-bottom: 5px;
   position: relative;
@@ -38,7 +35,6 @@ const ImageContainer = styled.div`
       opacity: 1;
     }
   }
-
   &::after {
     content: "";
     position: absolute;
@@ -62,6 +58,7 @@ const Title = styled.span`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* padding: 1.5rem 3rem; */
 `;
 const RatingsWrapper = styled.div`
   position: relative;
@@ -72,7 +69,6 @@ const RatingsWrapper = styled.div`
     color: var(--color-primary-lighter);
   }
 `;
-
 const SearchPoster = ({
   id,
   imageUrl,
@@ -100,11 +96,9 @@ const SearchPoster = ({
     </Container>
   </Link>
 );
-
 SearchPoster.propTypes = {
   movieId: PropTypes.number,
   imageUrl: PropTypes.string,
   title: PropTypes.string.isRequired,
 };
-
 export default SearchPoster;

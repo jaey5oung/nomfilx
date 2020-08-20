@@ -12,7 +12,7 @@ const async = require("async");
 router.post("/addToMovie", auth, (req, res) => {
   //User Collection에 해당 유저 정보를 가져오기(auth에 저장된 user._id를 불러올수있다.)
   User.findOne({ _id: req.user._id }, (err, userInfo) => {
-       User.findOneAndUpdate(
+    User.findOneAndUpdate(
       { _id: req.user._id },
       {
         $push: {
@@ -121,7 +121,7 @@ router.get("/management", (req, res) => {
 router.post("/removeFromUsers", (req, res) => {
   User.findOneAndDelete({
     email: req.body.email,
-  }).exec(err => {
+  }).exec((err) => {
     if (err) return res.status(400).send(err);
     return res.status(200).json({ success: true });
   });
@@ -137,20 +137,28 @@ router.post("/getUserInfo", (req, res) => {
 router.post("/updateProfile", (req, res) => {
   User.findOne({ _id: req.body.id }, (err, user) => {
     if (err) return res.json({ success: false, err });
-    User.updateOne(
-      { _id: user._id },
-      {
-        $set: {
-          password: req.body.newPassword,
-          image: req.body.newImage,
-          name: req.body.newName,
-        },
-      },
-      (err, user) => {
-        if (err) return res.json({ success: false, err });
-        res.status(200).json({ success: true, user });
+    user.comparePassword(req.body.password, (err, isMatch) => {
+      if (!isMatch) {
+        return res.json({
+          loginSuccess: false,
+          message: "비밀번호를 잘못 입력했습니다.",
+        });
       }
-    );
+      User.updateOne(
+        { _id: user._id },
+        {
+          $set: {
+            password: req.body.newPassword,
+            image: req.body.newImage,
+            name: req.body.newName,
+          },
+        },
+        (err, user) => {
+          if (err) return res.json({ success: false, err });
+          res.status(200).json({ success: true, user });
+        }
+      );
+    });
   });
 });
 
@@ -167,7 +175,7 @@ router.post("/googlelogin", (req, res) => {
       audience:
         "929257267887-jabje0s2v9gdvfrm1avh5qr1q63j9p91.apps.googleusercontent.com",
     })
-    .then(response => {
+    .then((response) => {
       const { email_verified, name, email } = response.payload;
 
       if (email_verified) {
@@ -266,7 +274,7 @@ router.post("/addToMovie", auth, (req, res) => {
   User.findOne({ _id: req.user._id }, (err, userInfo) => {
     let duplicate = false;
 
-    userInfo.movie.forEach(item => {
+    userInfo.movie.forEach((item) => {
       if (item.id === req.body.movieId) {
         duplicate = true;
       }
@@ -324,7 +332,7 @@ router.get("/removeFromMovie", auth, (req, res) => {
     { new: true },
     (err, userInfo) => {
       let movie = userInfo.movie;
-      let array = movie.map(item => {
+      let array = movie.map((item) => {
         return item._id;
       });
 
@@ -346,7 +354,7 @@ router.post("/addToCart", auth, (req, res) => {
   User.findOne({ _id: req.user._id }, (err, userInfo) => {
     // 가져온 정보에서 카트에다 넣으려 하는 상품이 이미 들어 있는지 확인
     let duplicate = false;
-    userInfo.cart.forEach(item => {
+    userInfo.cart.forEach((item) => {
       if (item.id === req.body.productId) {
         duplicate = true;
       }
@@ -396,7 +404,7 @@ router.get("/removeFromCart", auth, (req, res) => {
     { new: true },
     (err, userInfo) => {
       let cart = userInfo.cart;
-      let array = cart.map(item => {
+      let array = cart.map((item) => {
         return item.id;
       });
 
@@ -418,7 +426,7 @@ router.post("/successBuy", auth, (req, res) => {
   let history = [];
   let transactionData = {};
 
-  req.body.cartDetail.forEach(item => {
+  req.body.cartDetail.forEach((item) => {
     history.push({
       dateOfPurchase: Date.now(),
       name: item.title,
@@ -456,7 +464,7 @@ router.post("/successBuy", auth, (req, res) => {
 
         //상품당 몇개의 quantity를 샀는지
         let products = [];
-        doc.product.forEach(item => {
+        doc.product.forEach((item) => {
           products.push({ id: item.id, quantity: item.quantity });
         });
 
@@ -474,7 +482,7 @@ router.post("/successBuy", auth, (req, res) => {
               callback
             );
           },
-          err => {
+          (err) => {
             if (err) return res.json({ success: false, err });
             res.status(200).json({
               success: true,

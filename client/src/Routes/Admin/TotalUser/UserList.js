@@ -57,7 +57,7 @@ function UserList() {
 
     axios.post("/api/users/removeFromUser", variables).then((response) => {
       if (response.data.success) {
-        console.log("성공");
+        alert("회원 삭제")
         getUser();
       } else {
         alert("리스트에서 지우는데 실패했습니다.");

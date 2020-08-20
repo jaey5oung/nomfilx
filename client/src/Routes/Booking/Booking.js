@@ -96,7 +96,7 @@ function Booking({ id, title, bgImage, userFrom, selectDay, time, theater }) {
       .catch(err => {
         console.log(err);
       });
-      //[]안에 없어서 warning뜸
+    //[]안에 없어서 warning뜸
   }, [movieTitle, selectDay, theater, time]);
   //seat 색 변경
   const onSeatChange = e => {
@@ -124,16 +124,40 @@ function Booking({ id, title, bgImage, userFrom, selectDay, time, theater }) {
         if (!Seat.includes(e.target.textContent)) {
           alert("선택한 인원수보다 좌석을 많이 선택하셨습니다.");
         }
+      } else if (Continent < Seat.length) {
+        if (
+          //빈좌석
+          !e.target.classList.contains("occupied") &&
+          !e.target.classList.contains("selected")
+        ) {
+        } else if (e.target.classList.contains("selected")) {
+          if (Continent === Seat.length) {
+            return;
+          }
+          //인원수와 좌석수가 같을때
+          //선택된좌석은 삭제
+          e.target.classList.remove("selected");
+          const SeatFiltered = Seat.filter(
+            seat => seat !== e.target.textContent
+          ); //text삭제
+          setSeat(SeatFiltered);
+        }
       }
       //인원보다 좌석지정이 많을경우
-      //클릭 못하게
-      e.stopPropagation();
+      // //클릭 못하게
+      // e.stopPropagation();
     }
   };
   const onCount = event => {
-    setContinent(event.key);
-    setPrice(event.key * 6000);
+    if (event.key >= Seat.length) {
+      setContinent(event.key);
+      setPrice(event.key * 6000);
+    } else {
+      setContinent(event.key);
+      alert("선택한 좌석이 인원수보다 많습니다.");
+    }
   };
+
   //결제후 DB저장
   const transactionSuccess = () => {
     const body = {
@@ -188,6 +212,10 @@ function Booking({ id, title, bgImage, userFrom, selectDay, time, theater }) {
     },
   ];
   const onKaKaoPay = () => {
+    if (Continent !== Seat.length) {
+      alert("인원수와 선택 좌석수가 맞지 않습니다.");
+      return;
+    }
     var IMP = window.IMP; // 생략가능
     IMP.init("imp10561880");
     // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
@@ -237,6 +265,7 @@ function Booking({ id, title, bgImage, userFrom, selectDay, time, theater }) {
         <InnerWrapper
           style={{
             height: "200px",
+            width:"250px",
             display: "flex",
             flexDirection: "column",
             fontSize: "17px",
@@ -264,7 +293,6 @@ function Booking({ id, title, bgImage, userFrom, selectDay, time, theater }) {
               <tr>
                 <th style={{ color: "white" }}>좌석</th>
                 <td style={{ width: "75%" }}>
-                  {theater}관
                   {Seat.map((seat, index) => {
                     if (index < Seat.length - 1) {
                       return seat + ", ";

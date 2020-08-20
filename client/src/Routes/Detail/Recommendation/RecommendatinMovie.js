@@ -28,7 +28,7 @@ const RecommendatinMovie = ({ movie, id }) => {
       <MovieImg
         src={
           movie.poster_path
-            ? `${IMAGE_BASE_URL}${POSTER_SIZE}${movie.poster_path}`
+            ? `${IMAGE_BASE_URL}original${movie.poster_path}`
             : "https://www.movienewz.com/img/films/poster-holder.jpg"
         }
       />

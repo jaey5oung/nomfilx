@@ -1,22 +1,21 @@
 language: generic
 sudo: required
 
-services:  
- - docker
-before_install:  
- - docker build -t pjw6531/react-test-app -f ./client/Dockerfile.dev ./client
+services:
+  - docker
+before_install:
+  - docker build -t pjw6531/react-test-app -f ./client/Dockerfile.dev ./client
 
-script:  
- - docker run -e CI=true pjw6531/react-test-app npm test
+script:
+  - docker run -e CI=true pjw6531/react-test-app npm run test
 
 after_success:
- - docker build -t pjw6531/docker-frontend ./client
- - docker build -t pjw6531/docker-backend ./server
- - docker build -t pjw6531/docker-nginx ./nginx
+  - docker build -t pjw6531/docker-frontend ./client
+  - docker build -t pjw6531/docker-backend ./server
+  - docker build -t pjw6531/docker-nginx ./nginx
 
- - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_ID" --password-stdin
 
- -docker push pjw6531/docker-frontend
- -docker push pjw6531/docker-backend
- -docker push pjw6531/docker-nginx
-
+  - docker push pjw6531/docker-frontend
+  - docker push pjw6531/docker-backend
+  - docker push pjw6531/docker-nginx
