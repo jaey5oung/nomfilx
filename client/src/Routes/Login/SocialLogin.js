@@ -7,8 +7,6 @@ import styled from "styled-components";
 import { GOOGLE_KEY, GOOGLE_LOGO, KAKAO_KEY } from "../../Components/Config";
 const Container = styled.div`
   display: flex;
-  // margin:0;
-  // padding:0;
   flex-direction: row;
   justify-content: center;
 `;
@@ -18,7 +16,6 @@ const GoGo = styled.div`
   margin-top: 5px;
 `;
 const KaKaoBtn = styled(KaKaoLogin)`
-  //padding: 0;
   width: 17%;
   height: 52px;
   line-height: 44px;
@@ -39,9 +36,7 @@ function SocialLogin(props) {
     const data = {
       tokenId: response.tokenId,
     };
-    console.log(response);
     Axios.post("/api/users/googlelogin", data).then(response => {
-      console.log("Google Login Success", response.data);
       if (response.data.loginSuccess) {
         window.localStorage.setItem("userId", response.data.userId);
         props.history.push("/");
@@ -51,10 +46,8 @@ function SocialLogin(props) {
     });
   };
   const responseKaKao = response => {
-    console.log(response);
     const data = response;
     Axios.post("/api/users/kakaologin", data).then(response => {
-      console.log("Kakao Login Success", response.data);
       if (response.data.loginSuccess) {
         window.localStorage.setItem("userId", response.data.userId);
         props.history.push("/");
@@ -66,14 +59,6 @@ function SocialLogin(props) {
   return (
     <Container>
       <GoGo>
-        {/* <GoogleLogin
-        clientId="929257267887-jabje0s2v9gdvfrm1avh5qr1q63j9p91.apps.googleusercontent.com"
-        //buttonText=""        
-        className="button google"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={"single_host_origin"}    
-      /> */}
         <GoogleLogin
           clientId={GOOGLE_KEY}
           render={renderProps => (

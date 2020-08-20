@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react"
-import { Typography, Form, Input } from "antd"
+import React, { useState, useEffect } from "react";
+import { Typography, Form, Input } from "antd";
 
-import Button from "@material-ui/core/Button"
-import Dropzone from "react-dropzone"
-import Axios from "axios"
-import { withRouter } from "react-router-dom"
-import { LOCAL_SERVER } from "../../Components/Config"
-import "antd/dist/antd.css"
+import Button from "@material-ui/core/Button";
+import Dropzone from "react-dropzone";
+import Axios from "axios";
+import { withRouter } from "react-router-dom";
+import { LOCAL_SERVER } from "../../Components/Config";
+import "antd/dist/antd.css";
 
-const { Title } = Typography
+const { Title } = Typography;
 const formItemLayout = {
   labelCol: {
     span: 6,
@@ -19,25 +19,24 @@ const formItemLayout = {
 }
 
 function UpdateProfile(props) {
-  const [updatePasswordConfirm, setUpdatePasswordConfirm] = useState("")
-  const [updatePassword, setUpdatePassword] = useState("")
-  const [currentPassword, setCurrentPassword] = useState("")
-  const [FilePath, setFilePath] = useState("")
-  const [currentEmail, setCurrentEmail] = useState("")
-  const [currentName, setCurrentName] = useState("")
-  const [currentImage, setCurrentImage] = useState("")
-  const [UpdateName, setUpdateName] = useState("")
+  const [updatePasswordConfirm, setUpdatePasswordConfirm] = useState("");
+  const [updatePassword, setUpdatePassword] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [FilePath, setFilePath] = useState("");
+  const [currentEmail, setCurrentEmail] = useState("");
+  const [currentName, setCurrentName] = useState("");
+  const [currentImage, setCurrentImage] = useState("");
+  const [UpdateName, setUpdateName] = useState("");
+  
 
   useEffect(() => {
     Axios.post("/api/users/getUserInfo", {
       userId: localStorage.getItem("userId"),
     }).then((response) => {
       if (response.data.success) {
-        console.log(99, response.data)
-        setCurrentEmail(response.data.user[0].email)
-        setCurrentName(response.data.user[0].name)
-        // console.log(response.data.user[0].image);
-        setCurrentImage(response.data.user[0].image)
+        setCurrentEmail(response.data.user[0].email);
+        setCurrentName(response.data.user[0].name);
+        setCurrentImage(response.data.user[0].image);
       } else {
         alert("user 정보를 갖고오는데 실패했습니다.")
       }
@@ -48,15 +47,12 @@ function UpdateProfile(props) {
     let formData = new FormData()
     const config = {
       header: { "content-type": "multipart/form-data" },
-    }
-    console.log(files)
-    formData.append("file", files[0])
+    };
+    formData.append("file", files[0]);
 
     Axios.post("/api/image/uploadfiles", formData, config).then((response) => {
       if (response.data.success) {
-        console.log(response.data)
-
-        setFilePath(response.data.filePath)
+        setFilePath(response.data.filePath);
       } else {
         alert("failed to save the video in server")
       }
@@ -75,9 +71,8 @@ function UpdateProfile(props) {
     setUpdatePasswordConfirm(event.currentTarget.value)
   }
 
-  const onSubmit = (event) => {
-    event.preventDefault() //페이지 refresh 방지
-    console.log("들어왔다")
+  const onSubmit = event => {
+    event.preventDefault(); //페이지 refresh 방지
     let variable = {
       id: window.localStorage.getItem("userId"),
       password: currentPassword,
@@ -89,8 +84,7 @@ function UpdateProfile(props) {
       alert("소셜 계정입니다!")
     }
     if (updatePassword === updatePasswordConfirm) {
-      Axios.post("/api/users/updateProfile", variable).then((response) => {
-        console.log(response.data)
+      Axios.post("/api/users/updateProfile", variable).then(response => {
         if (response.data.success) {
           alert("변경되었습니다.")
           props.history.push("/")
@@ -142,7 +136,6 @@ function UpdateProfile(props) {
                 {...getRootProps()}
               >
                 <input {...getInputProps()} />
-
                 <img
                   style={{
                     display: "flex",

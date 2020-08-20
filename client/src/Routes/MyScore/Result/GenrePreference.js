@@ -11,7 +11,6 @@ const Container = styled.div`
 `;
 
 const SectionTitle = styled.div`
-  /* text-align: center; */
   font-size: 20px;
   font-weight: 400;
   margin-top: 15px;
@@ -28,8 +27,6 @@ const Nothing = styled.div`
   display: table;
 `;
 const ChartWrapper = styled.div`
-  /* border: 1px solid red; */
-  /* height: 100px; */
   margin-bottom:10px;
 `;
 const GenrePreference = ({ user, topGenre, result }) => {
@@ -86,7 +83,6 @@ const GenrePreference = ({ user, topGenre, result }) => {
           }}
           data={expData}
           height={100}
-          // width={1000}
           />
           </ChartWrapper>
       )}

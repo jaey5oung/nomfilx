@@ -8,26 +8,24 @@ import DatePicker, { utils } from "react-modern-calendar-datepicker";
 import Select from "react-select";
 import styled from "styled-components";
 import axios from "axios";
+
 const colourStyles = {
-  control: styles => ({
+  control: (styles) => ({
     ...styles,
     backgroundColor: "white",
     borderRadius: "1rem",
     fontSize: "1.1rem",
     width: "250px",
     textAlign: "center",
-    // marginTop: "25px",
-    // height: "10px",
     border: "1px solid #9c88ff",
     boxShadow: "0 1.5rem 2rem rgba(156, 136, 255, 0.2)",
     color: "#2e2e2e",
     fontWeight: "400",
   }),
-  option: (styles, { isDisabled, isFocused }) => {
+  option: (styles, { isDisabled }) => {
     return {
       ...styles,
       backgroundColor: isDisabled ? "#d4d4d4" : "#f7f7f7",
-      // backgroundColor: isFocused ? "#D8CEF6" : "#f7f7f7",
       color: "#151515",
       fontSize: "1.1rem",
       cursor: isDisabled ? "not-allowed" : "default",
@@ -49,7 +47,7 @@ const Button1 = styled.button`
 //시간 버튼
 const Button2 = styled.button`
   color: black;
-font-weight: 800;
+  font-weight: 800;
   font-size: 15px;
   margin: 8px;
   padding: 5px 12px 5px 12px;
@@ -65,18 +63,16 @@ const Wrapper = styled.div`
   padding: 5px;
 `;
 const TitleWrapper = styled.div`
-margin-top: 10px;
-margin-bottom: 8px;
+  margin-top: 10px;
+  margin-bottom: 8px;
 `;
 const Title = styled.span`
   font-size: 18px;
   margin: 5px;
 `;
-
 const InnerWrapper = styled.div`
-  min-height:200px;
-  max-width:450px;
-  /* padding-top:10px; */
+  min-height: 200px;
+  max-width: 450px;
 `;
 const Continents1 = [
   { key: 1, label: "11:00", value: "11:00" },
@@ -98,11 +94,7 @@ const Continents2 = [
   { key: 7, label: "22:00", value: "22:00" },
   { key: 8, label: "00:00", value: "00:00" },
 ];
-// const groupedOptions = [
-//   {
-//     options: Continentss,
-//   },
-// ];
+
 const ReservationAll = ({ userFrom, nowPlaying }) => {
   const movieList = nowPlaying.map((movie, index) => ({
     key: (index + 1) * 2,
@@ -137,26 +129,22 @@ const ReservationAll = ({ userFrom, nowPlaying }) => {
           : ""
       }
       style={{
-        // textAlign: "center",
         borderRadius: "1rem",
         fontSize: "1.1rem",
         border: "1px solid #9c88ff",
         boxShadow: "0 1.5rem 2rem rgba(156, 136, 255, 0.2)",
         color: "#2e2e2e",
         outline: "none",
-        // marginLeft: "10px",
         width: "250px",
         height: "38px",
-        // marginTop: "10px",
-        // marginBottom: "10px",
       }}
       className="my-custom-input-class"
     />
   );
-  const onTime = value => {
+  const onTime = (value) => {
     setTime({ time: value });
   };
-  const onMovie = event => {
+  const onMovie = (event) => {
     setMovie(event.value);
     setPoster(event.poster);
     setID(event.id);
@@ -164,31 +152,27 @@ const ReservationAll = ({ userFrom, nowPlaying }) => {
     setKey(event.key); //영화관 1관 2관 3관 .... 정하기 위해 씀
   };
   useEffect(() => {
-    // console.log("유즈이펙트 실행", movie, selectDay, time);
     const movieTitle = {
       title: movie,
     };
     axios
       .post("/api/reservation/findSeat", movieTitle)
-      .then(response => {
+      .then((response) => {
         if (response.data.success) {
           let seatlist = [];
-          response.data.seats.forEach(obj => {
+          response.data.seats.forEach((obj) => {
             if (
-              // obj.time[0].time === time.time &&
               obj.selectDay[0].day === selectDay.day &&
               obj.selectDay[0].month === selectDay.month &&
               obj.selectDay[0].year === selectDay.year
-              // obj.theater === theater
             ) {
               seatlist.push(obj);
             }
           });
-          // console.log("22222", seatlist);
           setDistinct(seatlist);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }, [movie, selectDay, time, theater]);
@@ -197,13 +181,17 @@ const ReservationAll = ({ userFrom, nowPlaying }) => {
     let countAllSeats = theater % 2 === 1 ? 55 : 45;
     let count = 0;
     Distinct &&
-      Distinct.forEach(obj => {
+      Distinct.forEach((obj) => {
         if (obj.time[0].time === time && obj.theater === theater) {
           count = count + obj.continent;
         }
       });
-      let myColor=(countAllSeats-count)>10? "black" : "red"; 
-      return <span style={{ color: myColor, fontWeight:"500"  }}>{countAllSeats - count}</span>;
+    let myColor = countAllSeats - count > 10 ? "black" : "red";
+    return (
+      <span style={{ color: myColor, fontWeight: "500" }}>
+        {countAllSeats - count}
+      </span>
+    );
   };
 
   return (
@@ -236,7 +224,6 @@ const ReservationAll = ({ userFrom, nowPlaying }) => {
       <Wrapper>
         <Select
           options={movieOptions}
-          // defaultValue={groupedOptions[1]}
           placeholder="  영화를 선택해주세요"
           styles={colourStyles}
           onChange={onMovie}
@@ -245,27 +232,31 @@ const ReservationAll = ({ userFrom, nowPlaying }) => {
       <Wrapper>
         {visible ? (
           <InnerWrapper>
-            <TitleWrapper style={{marginTop:"5px"}}>
-            <Title>
-              {movie}&nbsp;&nbsp;|&nbsp;&nbsp;<span style={{color:"#d8d8d8"}}>{key - 1}관</span>
-            </Title>
+            <TitleWrapper style={{ marginTop: "5px" }}>
+              <Title>
+                {movie}&nbsp;&nbsp;|&nbsp;&nbsp;
+                <span style={{ color: "#d8d8d8" }}>{key - 1}관</span>
+              </Title>
             </TitleWrapper>
             {Continents1.map((item, index) => (
-                <Button2
-                  key={index}
-                  style={{ color: "black" }}
-                  onClick={() => {
-                    setTheater(key - 1);
-                    onTime(item.value);
-                  }}
-                >
-                    {item.label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{countLeftSeats(item.value, key - 1)}석
-                </Button2>
+              <Button2
+                key={index}
+                style={{ color: "black" }}
+                onClick={(props) => {
+                  setTheater(key - 1);
+                  onTime(item.value);
+                  props.currentTarget.style.backgroundColor = "mediumslateblue";
+                }}
+              >
+                {item.label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                {countLeftSeats(item.value, key - 1)}석
+              </Button2>
             ))}
             <TitleWrapper>
-            <Title>
-            {movie}&nbsp;&nbsp;|&nbsp;&nbsp;<span style={{color:"#d8d8d8"}}>{key}관</span> 
-            </Title>
+              <Title>
+                {movie}&nbsp;&nbsp;|&nbsp;&nbsp;
+                <span style={{ color: "#d8d8d8" }}>{key}관</span>
+              </Title>
             </TitleWrapper>
             {Continents2.map((item, index) => (
               <Button2
@@ -276,17 +267,24 @@ const ReservationAll = ({ userFrom, nowPlaying }) => {
                   onTime(item.value);
                 }}
               >
-                  {item.label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{countLeftSeats(item.value, key)}석
+                {item.label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                {countLeftSeats(item.value, key)}석
               </Button2>
             ))}
           </InnerWrapper>
         ) : (
-            <div style={{ textAlign: "center", marginTop:"10px", marginBottom:"10px" }}>
-              <span style={{ fontSize: "20px" }}>
-                클릭하면 영화 시간이 보입니다.
+          <div
+            style={{
+              textAlign: "center",
+              marginTop: "10px",
+              marginBottom: "10px",
+            }}
+          >
+            <span style={{ fontSize: "20px" }}>
+              클릭하면 영화 시간이 보입니다.
             </span>
-            </div>
-          )}
+          </div>
+        )}
       </Wrapper>
       <Wrapper>
         <>
@@ -331,7 +329,6 @@ const ReservationAll = ({ userFrom, nowPlaying }) => {
           </Popup>
         </>
       </Wrapper>
-      {/* </Grid> */}
     </Popup>
   );
 };

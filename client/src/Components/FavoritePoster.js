@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Ratingg from "../Components/Rating";
+// import Ratingg from "../Components/Rating";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -27,22 +27,15 @@ const useStyles = makeStyles(theme => ({
 const Container = styled.div`
   font-size: 12px;
   min-height: 350px;
-  // border: 1px solid red;
   width: 200px;
 `;
 const Image = styled.div`
-  background-image: url(${props => props.bgUrl});
-
+  background-image: url(${(props) => props.bgUrl});
   width: 200px;
-
   height: 300px;
-
   margin-right: 20px;
-
   background-size: cover;
-
   border-radius: 4px;
-
   transition: all 0.1s linear 0s;
 `;
 const Rating = styled.span`
@@ -55,31 +48,25 @@ const Rating = styled.span`
 `;
 const ImageContainer = styled.div`
   margin-bottom: 5px;
-
   position: relative;
-
   &:hover {
     ${Image} {
       opacity: 0.3;
     }
-
     ${Rating} {
       opacity: 1;
     }
   }
-
   transition: all 300ms cubic-bezier(0.645, 0.045, 0.355, 1);
   position: relative;
   transition: all 300ms cubic-bezier(0.215, 0.61, 0.355, 1);
   &:hover {
     transform: scale(1.03);
-
     ::after {
       transform: scaleY(1);
       opacity: 1;
     }
   }
-
   &::after {
     content: "";
     position: absolute;
@@ -120,7 +107,6 @@ const RatingsWrapper = styled.div`
   align-items: center;
   margin-bottom: 0.5rem;
   color: var(--color-primary);
-
   ${Container}:hover & {
     color: var(--color-primary-lighter);
   }
@@ -130,16 +116,8 @@ const DelBtnContainer = styled.div`
   text-align: center;
 `;
 
-const FavoritePoster = ({
-  onClickDelete,
-  id,
-  imageUrl,
-  title,
-  rating,
-  year,
-  isMovie = false,
-}) => {
-  const classes = useStyles();
+const FavoritePoster = ({ onClickDelete, id, imageUrl, title, rating, year, isMovie = false }) => {
+  const classes = useStyles()
   return (
     <Container>
       <Link to={`/movie/${id}`}>
@@ -165,7 +143,7 @@ const FavoritePoster = ({
           {title.length > 18 ? `${title.substring(0, 8)}...` : title}
         </Title>
         <Year>
-          <Ratingg number={rating / 2} myColor="white" />
+          {/* <Ratingg number={rating / 2} myColor="white" /> */}
         </Year>
       </RatingsWrapper>
       <DelBtnContainer>

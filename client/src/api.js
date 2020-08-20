@@ -28,7 +28,6 @@ export const moviesApi = {
         query: term,
       },
     }),
-  trending: () => api.get("trending/movie/day"),
   cast: id =>
     api.get(`movie/${id}/credits`, {
       params: {

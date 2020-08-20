@@ -37,13 +37,11 @@ function AdminContainer() {
               <span>Admin</span>
               <Link to="/admin" />
             </Menu.Item>
-
             <Menu.Item key="2">
               <Icon type="user" />
               <span>사용자 관리</span>
               <Link to="/UserList" />
             </Menu.Item>
-
             <SubMenu key="3" icon={<ContainerOutlined />} title="예매관리">
               <Menu.Item key="4">
                 <span>
@@ -60,7 +58,6 @@ function AdminContainer() {
                 <Link to="/reservationsCalendar" />
               </Menu.Item>
             </SubMenu>
-
             <SubMenu key="6" icon={<ContainerOutlined />} title="상품관리">
               <Menu.Item key="7">
                 <span>
@@ -86,7 +83,6 @@ function AdminContainer() {
             </SubMenu>
           </Menu>
         </Sider>
-
         <Layout>
           <Header style={{ background: "#fff", padding: 0, paddingLeft: 16 }}>
             <Icon

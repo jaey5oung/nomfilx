@@ -1,5 +1,4 @@
 import User from "../../Components/User";
-
 import React, { Component } from "react";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -19,6 +18,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import Axios from "axios";
 import "./Admin.css";
+
 const styles = (theme) => ({
   root: {
     width: "100%",

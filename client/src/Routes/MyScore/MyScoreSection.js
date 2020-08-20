@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Popup from 'reactjs-popup';
-import Result from './Result/Result'
+import Popup from "reactjs-popup";
+import Result from "./Result/Result";
 
 const Container = styled.div`
   :not(:last-child) {
@@ -44,11 +44,13 @@ const PopUpButton = styled.button`
 const MyScoreSection = ({ title, children }) => (
   <Container>
     <Title>{title}</Title>
-    <Popup trigger={<PopUpButton>RESULT</PopUpButton>}
+    <Popup
+      trigger={<PopUpButton>RESULT</PopUpButton>}
       modal
       closeOnDocumentClick
-      contentStyle={{backgroundColor: "#5D5D5D",minWidth:"950px", }}>
-      {close => <Result close={close}/>}
+      contentStyle={{ backgroundColor: "#5D5D5D", minWidth: "950px" }}
+    >
+      {(close) => <Result close={close} />}
     </Popup>
     <Grid>{children}</Grid>
   </Container>

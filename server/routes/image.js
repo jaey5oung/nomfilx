@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
-// const { User } = require("../models/User");
-
-// const { auth } = require("../middleware/auth");
 
 var storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -22,10 +19,6 @@ var storage = multer.diskStorage({
 });
 
 var upload = multer({ storage: storage }).single("file");
-
-//=================================
-//             User
-//=================================
 
 router.post("/uploadfiles", (req, res) => {
   upload(req, res, err => {

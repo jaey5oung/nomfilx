@@ -8,7 +8,6 @@ function ImageSlider(props) {
         {props.images.map((image, index) => (
           <div key={index} style={{}}>
             <img
-              // style={{ width: "100%", height: "100%", borderRadius:"5px" }}
               style={{ width: "100%", maxHeight: "110px" }}
               src={`${LOCAL_SERVER}${image}`}
               alt="productImage"

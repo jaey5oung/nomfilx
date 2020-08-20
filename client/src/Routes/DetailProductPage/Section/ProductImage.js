@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ImageGallery from "react-image-gallery";
 import { LOCAL_SERVER } from "../../../Components/Config";
-// import "./style.css";
 
 function ProductImage(props) {
   const [Images, setImages] = useState([]);

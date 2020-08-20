@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../../_actions/user_action";
 import { withRouter } from "react-router-dom";
 import SocialLogin from "./SocialLogin";
-import Axios from "axios";
 
 function Login(props) {
   const dispatch = useDispatch();
@@ -29,7 +28,6 @@ function Login(props) {
 
     //redux action => loginUser는 action이름
     dispatch(loginUser(body)).then((response) => {
-      // console.log(response.payload);
       if (response.payload.loginSuccess) {
         window.localStorage.setItem("userId", response.payload.userId); //
         props.history.push("/");
@@ -38,19 +36,6 @@ function Login(props) {
       }
     });
   };
-
-  const handleSubmit = (e) => {
-    console.log('====================================');
-    console.log("handelsubmit 들어옴");
-    console.log('====================================');
-    e.preventDefault();
-
-    const dataToSubmit = {
-      email : Email
-    }
-
-    Axios.post("/api/users/sendMail", dataToSubmit)
-  }
 
   return (
     <div className="auth-wrapper">
@@ -93,9 +78,6 @@ function Login(props) {
           <br />
           <a href="/sign-up">회원이 아니신가요?</a>
         </form>
-        
-          
-        
       </div>
     </div>
   );

@@ -24,8 +24,6 @@ function DetailProductPage(props) {
       <div
         style={{
           display: "flex",
-          // justifyContent: "center",
-          
         }}
       >
         <h1 style={{ color: "#f7f7f7", fontSize: "50px", fontWeight:"400" }}>{Product.title}</h1>

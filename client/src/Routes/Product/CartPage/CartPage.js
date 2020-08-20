@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import PropTypes from 'prop-types';
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core";
 import {
@@ -10,7 +9,6 @@ import {
   TableRow,
   TablePagination,
 } from "@material-ui/core";
-
 import Portlet from "../../MyMovie/Sections/Portlet";
 import PortletContent from "../../MyMovie/Sections/PortletContent";
 import styles from "../../MyMovie/Sections/styles";
@@ -36,7 +34,6 @@ class CartPage extends Component {
 
   render() {
     const { classes, className, products, removeItem } = this.props;
-
     const { rowsPerPage, page } = this.state;
     const rootClassName = classNames(classes.root, className);
 

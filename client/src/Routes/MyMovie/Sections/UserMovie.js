@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import PropTypes from 'prop-types';
 import classNames from "classnames";
 import { withStyles } from "@material-ui/core";
 import {
@@ -10,7 +9,6 @@ import {
   TableRow,
   TablePagination,
 } from "@material-ui/core";
-
 import Portlet from "./Portlet";
 import PortletContent from "./PortletContent";
 import styles from "./styles";
@@ -20,16 +18,6 @@ class UserMovie extends Component {
     rowsPerPage: 10,
     page: 0,
   };
-
-  // static propTypes = {
-  //   className: PropTypes.string,
-  //   classes: PropTypes.object.isRequired,
-  //   onSelect: PropTypes.func,
-  //   onShowDetails: PropTypes.func,
-  //   reservations: PropTypes.array.isRequired,
-  //   movies: PropTypes.array.isRequired,
-  //   cinemas: PropTypes.array.isRequired
-  // };
 
   static defaultProps = {
     movies: [],
@@ -43,15 +31,8 @@ class UserMovie extends Component {
     this.setState({ rowsPerPage: event.target.value });
   };
 
-  // onFindAttr = (id, list, attr) => {
-  //   const item = list.find(item => item._id === id);
-  //   return item ? item[attr] : `Not ${attr} Found`;
-  // };
-
   render() {
     const { classes, className, movies, removeItem } = this.props;
-
-
     const { rowsPerPage, page } = this.state;
     const rootClassName = classNames(classes.root, className);
     return (

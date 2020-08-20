@@ -3,17 +3,6 @@
   const { MyScore } = require("../models/MyScore");
 
   router.post("/giveStarRating", (req, res) => { //별점 주기
-    // console.log("req.body:", req.body); //userFrom, movieId, genres, score, imageUrl, title
-    // let {userFrom, movieId, genres, score, imageUrl, title, _id} = req.body
-    // let query = {userFrom, movieId, genres, score, imageUrl, title, _id};
-
-    // console.log(query._id);
-
-    // if(query._id === undefined) {
-    //   query._id = new mongoose.Types.ObjectId();
-    // }
-
-
     MyScore.findOne({ userFrom: req.body.userFrom, movieId: req.body.movieId }, (err, obj) => {
       if (obj === null) { //해당영화 없음(새로 별점)
         const myScore = new MyScore(req.body);
@@ -31,8 +20,6 @@
         })
       }
     })
-
-
   });
 
   router.post("/myCount", (req,res)=>{

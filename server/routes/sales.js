@@ -17,20 +17,14 @@ router.get("/getReservationSales", (req, res) => {
 
 //매점판매 가격 불러오기
 router.get("/getProductSales", (req, res) => {
-
     Payment.find({}, ["product"]).exec((err, doc) => {
-        // Payment.find({},{$where: ‘this.product[0].price’})
-        //console.log("db",doc[i].product[i].price);
         let arr = [];
         doc.map(({ product }) => {
             arr.push(product[0].price)
         })
-
         if (err) return res.status(400).send(err);
         return res.status(200).json({ success: true, arr });
     })
-
-
 });
 
 

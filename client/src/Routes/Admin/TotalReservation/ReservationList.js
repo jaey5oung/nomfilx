@@ -5,7 +5,6 @@ const { Column } = Table;
 
 function ReservationList() {
   const [Reservation, setReservation] = useState([]);
-  console.log("Res", Reservation);
   useEffect(() => {
     axios
       .post("/api/reservation/getList")
@@ -13,14 +12,13 @@ function ReservationList() {
         if (response.data.success) {
           setReservation(response.data.doc);
         } else {
-          console.log("실패");
+          alert("실패");
         }
       })
       .catch(err => {
         console.log(err);
       });
   }, []);
-
   return (
     <PageHeader
       title="Reservation List"

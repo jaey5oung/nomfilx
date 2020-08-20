@@ -10,10 +10,9 @@ const globalStyles = createGlobalStyle`
     *{
         color: inherit;
         box-sizing:border-box;
-        
     }
     body{
-        font-family:"Netflix Sans Icon";
+        font-family: "Netflix Sans Icon";
         font-size:14px;
         background-color:black;
         color:#e5e5e5;

@@ -92,7 +92,6 @@ function Favorite(props) {
           </>
         ) : (
           <>
-          
             <MoodIcon />
             {FavoriteNumber}
           </>

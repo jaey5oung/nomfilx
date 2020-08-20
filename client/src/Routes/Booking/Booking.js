@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import { Grid, TextField, MenuItem } from "@material-ui/core";
 import axios from "axios";
 import styled from "styled-components";
 import "../Reservation/style.css";
@@ -33,7 +32,6 @@ const Small = styled.div`
   font-size: 20px;
   color: white;
 `;
-//------------------------------------------------------------------------------------------
 const Wrapper = styled.div`
   float: left;
   height: 100%;
@@ -45,21 +43,11 @@ const SeatWrapper = styled.div`
 const SelectWrapper = styled.div`
   background-color: #242333;
   color: #fff;
-  /* display: flex;
-  flex-direction: row;
-  //align-items: center;
-  justify-content: flex-end; */
-  /* width: 50%; */
   font-family: "Lato", sans-serif;
 `;
 const InnerWrapper = styled.div`
   background-color: #242333;
   color: #fff;
-  /* display: flex;
-  flex-direction: row;
-  //align-items: center;
-  justify-content: flex-end; */
-  /* width: 50%; */
   font-family: "Lato", sans-serif;
 `;
 const Cover = styled.div`
@@ -74,15 +62,13 @@ const Cover = styled.div`
   display: flex;
   flex-direction: column;
 `;
-//------------------------------------------------------------------------------------------
 function Booking({ id, title, bgImage, userFrom, selectDay, time, theater }) {
   const dispatch = useDispatch();
   const [Continent, setContinent] = useState(0);
   const [Seat, setSeat] = useState([]);
   const [Price, setPrice] = useState(0);
   const [Distinct, setDistinct] = useState([]);
-  // const [Test, setTest] = useState("");
-  // const [Url, setUrl] = useState("");
+
   const movieTitle = {
     title: title,
   };
@@ -93,7 +79,6 @@ function Booking({ id, title, bgImage, userFrom, selectDay, time, theater }) {
         if (response.data.success) {
           let seatlist = [];
           response.data.seats.forEach(obj => {
-            // console.log("obj", obj);
             if (
               obj.time[0].time === time.time &&
               obj.selectDay[0].day === selectDay.day &&
@@ -111,7 +96,8 @@ function Booking({ id, title, bgImage, userFrom, selectDay, time, theater }) {
       .catch(err => {
         console.log(err);
       });
-  }, []);
+      //[]안에 없어서 warning뜸
+  }, [movieTitle, selectDay, theater, time]);
   //seat 색 변경
   const onSeatChange = e => {
     if (Continent >= Seat.length + 1) {
@@ -145,7 +131,6 @@ function Booking({ id, title, bgImage, userFrom, selectDay, time, theater }) {
     }
   };
   const onCount = event => {
-    console.log("event", event);
     setContinent(event.key);
     setPrice(event.key * 6000);
   };
@@ -174,7 +159,6 @@ function Booking({ id, title, bgImage, userFrom, selectDay, time, theater }) {
       }
     });
   };
-  ////////////////////////////////////////////////////////////////
   const colourStyles = {
     control: styles => ({
       ...styles,
@@ -182,7 +166,6 @@ function Booking({ id, title, bgImage, userFrom, selectDay, time, theater }) {
       borderRadius: "1rem",
       fontSize: "1.1rem",
       width: "250px",
-      // marginTop: "25px",
       height: "35px",
       border: "1px solid #9c88ff",
       boxShadow: "0 1.5rem 2rem rgba(156, 136, 255, 0.2)",
@@ -193,7 +176,6 @@ function Booking({ id, title, bgImage, userFrom, selectDay, time, theater }) {
       return {
         ...styles,
         backgroundColor: isDisabled ? "red" : "#f7f7f7",
-        backgroundColor: isFocused ? "#D8CEF6" : "#f7f7f7",
         color: "#151515",
         fontSize: "1.1rem",
         cursor: isDisabled ? "not-allowed" : "default",
@@ -229,7 +211,6 @@ function Booking({ id, title, bgImage, userFrom, selectDay, time, theater }) {
           msg += "고유ID : " + rsp.imp_uid;
           msg += "상점 거래ID : " + rsp.merchant_uid;
           msg += "결제 금액 : " + rsp.paid_amount;
-          // msg += "카드 승인번호 : " + rsp.apply_num;
           transactionSuccess(); //결제 후 예매 내역 db 저장
         } else {
           msg = "결제에 실패하였습니다.";
@@ -241,18 +222,15 @@ function Booking({ id, title, bgImage, userFrom, selectDay, time, theater }) {
   };
   return (
     <>
-      {/* <Wrapper style={{ marginRight: "20px" }}> */}
       <Wrapper>
         <SelectWrapper>
           <Select
             options={groupedOptions}
             placeholder="  인원을 선택해주세요"
-            // defaultValue="인원을 선택해주세요"
             styles={colourStyles}
             onChange={onCount}
           />
         </SelectWrapper>
-
         <InnerWrapper style={{ height: "300px", marginTop: "20px" }}>
           <Cover bgImage={`${IMAGE_BASE_URL}original${bgImage}`} />
         </InnerWrapper>
@@ -309,7 +287,6 @@ function Booking({ id, title, bgImage, userFrom, selectDay, time, theater }) {
           />
         </InnerWrapper>
       </Wrapper>
-      {/* **************************************************************************************** */}
       {theater % 2 === 1 ? (
         <SeatWrapper>
           <ul className="showcase">
@@ -729,8 +706,6 @@ function Booking({ id, title, bgImage, userFrom, selectDay, time, theater }) {
           </div>
         </SeatWrapper>
       )}
-
-      {/* </Nav> */}
     </>
   );
 }

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-
 import { Table, PageHeader, Tag } from "antd";
 import Axios from "axios";
 const { Column } = Table;
 
-function ProductList(props) {
+function ProductList() {
   const [History, setHistory] = useState([]);
 
   const newDoc = [];
@@ -17,7 +16,6 @@ function ProductList(props) {
           i++;
         });
         const flatlist = newDoc.flat();
-        // console.log(2222222, flatlist);
         setHistory(flatlist);
       } else {
         alert("정보를 가져오는데 실패했습니다.");
@@ -37,7 +35,6 @@ function ProductList(props) {
       <div style={{ width: "80%", margin: "3rem auto" }}>
         <div style={{ textAlign: "center" }}>
           <br />
-
           <Table key dataSource={History}>
             <Column
               title="결제ID"
@@ -45,8 +42,8 @@ function ProductList(props) {
               key="data"
               render={data => (
                 <>
-                  {data.map(data => (
-                    <div key={data}>{data.uid}</div>
+                  {data.map((data, index) => (
+                    <div key={index}>{data.uid}</div>
                   ))}
                 </>
               )}
@@ -57,8 +54,8 @@ function ProductList(props) {
               key="product"
               render={product => (
                 <>
-                  {product.map(data => (
-                    <div key={data}>{data.name}</div>
+                  {product.map((data, index) => (
+                    <div key={index}>{data.name}</div>
                   ))}
                 </>
               )}
@@ -69,8 +66,8 @@ function ProductList(props) {
               key="product"
               render={product => (
                 <>
-                  {product.map(data => (
-                    <div key={data}>{data.price}원</div>
+                  {product.map((data, index) => (
+                    <div key={index}>{data.price}원</div>
                   ))}
                 </>
               )}
@@ -81,8 +78,8 @@ function ProductList(props) {
               key="product"
               render={product => (
                 <>
-                  {product.map(data => (
-                    <div key={data}>{data.quantity}EA</div>
+                  {product.map((data, index) => (
+                    <div key={index}>{data.quantity}EA</div>
                   ))}
                 </>
               )}
@@ -94,8 +91,8 @@ function ProductList(props) {
               key="user"
               render={product => (
                 <>
-                  {product.map(data => (
-                    <div key={data}>{data.name}</div>
+                  {product.map((data, index) => (
+                    <div key={index}>{data.name}</div>
                   ))}
                 </>
               )}
@@ -107,8 +104,8 @@ function ProductList(props) {
               key="user"
               render={product => (
                 <>
-                  {product.map(data => (
-                    <div key={data}>{data.email}</div>
+                  {product.map((data,index) => (
+                    <div key={index}>{data.email}</div>
                   ))}
                 </>
               )}

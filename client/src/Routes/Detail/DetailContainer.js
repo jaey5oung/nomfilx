@@ -22,17 +22,15 @@ export default class extends React.Component {
   }
 
   async componentDidMount() {
-
     const {
       match: {
         params: { id },
       },
       history: {
-        push, //f push(path, state)
+        push,
       },
     } = this.props;
 
-    // const { isMovie } = this.state;
     const parsedId = parseInt(id);
 
     if (isNaN(parsedId)) {
@@ -43,7 +41,7 @@ export default class extends React.Component {
     let video = null;
     let recommendations = null;
     try {
-      ({ data: result } = await moviesApi.movieDetail(parsedId)); // const = 이거랑 양쪽에 () 한거랑 같은거야
+      ({ data: result } = await moviesApi.movieDetail(parsedId)); 
       ({ data: castResult } = await moviesApi.cast(parsedId));
       ({ data: video } = await moviesApi.videos(parsedId));
       ({ data: recommendations } = await moviesApi.recommendationMovie(
@@ -52,6 +50,7 @@ export default class extends React.Component {
     } catch {
       this.setState({ error: "Can't find anything." });
     } finally {
+
       this.setState({
         loading: false,
         result,
@@ -61,6 +60,7 @@ export default class extends React.Component {
       });
     }
   }
+
 
   render() {
     const {

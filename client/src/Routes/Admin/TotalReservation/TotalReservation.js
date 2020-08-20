@@ -29,7 +29,6 @@ const useStyles = makeStyles(theme => ({
     width: 32,
   },
   difference: {
-    // marginTop: theme.spacing(2),
     display: "flex",
     alignItems: "center",
   },
@@ -38,7 +37,6 @@ const useStyles = makeStyles(theme => ({
   },
   differenceValue: {
     color: green[700],
-    // marginRight: theme.spacing(1),
   },
 }));
 
@@ -53,7 +51,7 @@ function TotalReservation() {
         if (response.data.success) {
           setReservationCount(response.data.doc.length);
         } else {
-          console.log("실패");
+          alert("실패");
         }
       })
       .catch(err => {

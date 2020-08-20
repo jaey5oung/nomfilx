@@ -37,10 +37,8 @@ function Product() {
         alert("리스트에서 지우는데 실패했습니다.");
       }
     });
-
     dispatch(removeCartItem(_id));
   };
-
   return (
     <PageHeader
       title="Product List"
@@ -54,9 +52,7 @@ function Product() {
       <div style={{ width: "80%", margin: "3rem auto" }}>
         <div style={{ textAlign: "center" }}>
           <br />
-
           <Table dataSource={Product}>
-            {/* 이미지 넣을수 있음 좋겟당 */}
             <Column title="ID" dataIndex="_id" key="id" />
             <Column title="상품명" dataIndex="title" key="name" />
             <Column title="sold" dataIndex="sold" key="sold" />

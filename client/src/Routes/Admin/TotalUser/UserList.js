@@ -16,7 +16,7 @@ function UserList() {
       if (response.data.success) {
         setUser(response.data.users);
       } else {
-        console.log("불러오기 실패");
+        alert("불러오기 실패");
       }
     });
   };
@@ -31,7 +31,7 @@ function UserList() {
         alert("관리자 변경완료");
         getUser();
       } else {
-        console.log("실패");
+        alert("실패");
       }
     });
   };
@@ -45,7 +45,7 @@ function UserList() {
         alert("회원등급 변경완료");
         getUser();
       } else {
-        console.log("실패");
+        alert("실패");
       }
     });
   };

@@ -37,7 +37,6 @@ const Select = styled.span`
 
 function MyScore() {
   const buttonRef = useRef(null);
-
   const [Movies, setMovies] = useState([]);
   const [Loading, setLoading] = useState(true);
   const [CurrentPage, setCurrentPage] = useState(parseInt(Math.random() * 100));
@@ -57,7 +56,7 @@ function MyScore() {
         if (response.data.success) {
           setCount(response.data.obj.length);
         } else {
-          console.log("fail");
+          alert("fail");
         }
       });
   }, []);

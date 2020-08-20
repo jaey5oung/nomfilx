@@ -20,7 +20,7 @@ const Result = () => {
                 let arr = response.data.obj.reverse()
                 setRecent(arr.slice(0, 5))
             } else {
-                console.log("fail");
+                alert("fail");
             }
         })
         genreApi();
@@ -36,7 +36,6 @@ const Result = () => {
     }
 
     //선호 장르 순서 정렬
-
     const arrOfGenres = genre.map((g) => { //count 변수 추가한 장르 배열
         return { id: g.id, name: g.name, count: 0 };
     })

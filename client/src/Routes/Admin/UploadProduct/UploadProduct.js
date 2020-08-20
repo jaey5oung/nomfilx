@@ -81,7 +81,6 @@ function UploadProductPage(props) {
       <Form onSubmit={onSubmit}>
         {/* DropZone */}
         <FileUpload refreshFunction={updateImages} />
-
         <br />
         <br />
         <label style={{ color: "black" }}>상품명</label>

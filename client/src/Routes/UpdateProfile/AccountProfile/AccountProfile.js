@@ -6,7 +6,6 @@ import { Avatar, Typography, Button } from "@material-ui/core";
 import Portlet from "../../MyMovie/Sections/Portlet";
 import PortletContent from "../../MyMovie/Sections/PortletContent";
 import Dropzone from "react-dropzone";
-// import PortletFooter from "../../MyMovie/Sections/PortletFooter";
 
 // Component styles
 import styles from "./styles";
@@ -33,11 +32,5 @@ class AccountProfile extends Component {
     );
   }
 }
-
-// AccountProfile.propTypes = {
-//   className: PropTypes.string,
-//   classes: PropTypes.object.isRequired,
-//   ap: PropTypes.object.isRequired,
-// };
 
 export default withStyles(styles)(AccountProfile);

@@ -3,14 +3,9 @@ const app = express();
 const bodyParser = require("body-parser"); //body 데이터를 분석(parse)해서 req.body로 출력해주는 것
 const cookieParser = require("cookie-parser");
 const config = require("./config/key");
-//application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
-
-//application/json
 app.use(bodyParser.json());
-
 app.use(cookieParser());
-
 const mongoose = require("mongoose");
 mongoose
   .connect(config.mongoURI, {

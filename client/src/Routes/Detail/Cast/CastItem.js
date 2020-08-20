@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-
 import { IMAGE_BASE_URL } from "../../../Components/Config";
 
 const MovieImg = styled.img`

@@ -8,7 +8,7 @@ const StarsWrapper = styled.div`
   text-align: center;
 `;
 
-const Rating = ({ movieId, count, setCount, genres, imageUrl, title }) => {//{ movieId, count, setCount, genres, imageUrl, title }
+const Rating = ({ movieId, count, setCount, genres, imageUrl, title }) => {
 
 const onClickHandler = (value) => {
     axios.post("/api/myscore/giveStarRating", {

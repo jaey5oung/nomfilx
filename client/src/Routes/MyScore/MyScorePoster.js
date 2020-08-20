@@ -54,14 +54,9 @@ const ImageContainer = styled.div`
 `;
 const Title = styled.span`
   font-size: 17px;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
 `;
 const RatingsWrapper = styled.div`
   margin-bottom: 0.5rem;
-  /* margin: 0 auto; */
   text-align: center;
   color: var(--color-primary);
   ${Container}:hover & {

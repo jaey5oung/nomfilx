@@ -17,18 +17,6 @@ const Title = styled.span`
   font-weight: 600;
   padding: 0px 0px 30px;
 `;
-const TitleSub = styled.a`
-  font-size: 30px;
-  font-weight: 400;
-  color: lime;
-  /* margin-left: 30px; */
-  padding: 0px 10px 2px;
-  border-width: 2px;
-  border-color: mediumslateblue;
-  border-image: initial;
-  border-radius: 5px;
-  transition: all 0.2s ease 0s;
-`;
 const Grid = styled.div`
 
   margin-top: 30px;
@@ -58,7 +46,7 @@ const Section = (
   return (
     <Container>
       <Title>
-        <TitleSub>{title}</TitleSub>
+        {title}
       </Title>
       {title === "Now Playing" ? (
         <>
@@ -80,7 +68,7 @@ Section.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node, //구글링
+    PropTypes.node,
   ]),
 };
 export default Section;

@@ -29,6 +29,5 @@ ReactDOM.render(
       <App />
     </ThemeProvider>
   </Provider>,
-
   document.getElementById("root")
 );

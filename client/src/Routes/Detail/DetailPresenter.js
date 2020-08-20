@@ -18,58 +18,38 @@ const Container = styled.div`
   padding: 50px;
   overflow: hidden;
   &::-webkit-scrollbar {
-    display: none !important; // 윈도우 크롬 등
+    display: none;
   }
 `;
 
 const Backdrop = styled.div`
   position: absolute;
-
   top: 0;
-
   left: 0;
-
   width: 100%;
-
   height: 100vh;
-
   background-image: url(${(props) => props.bgImage});
-
   background-position: center center;
-
   background-size: cover;
-
   filter: blur(0px);
-
   opacity: 0.5;
-
   z-index: 0;
 `;
 
 const Content = styled.div`
   display: flex;
-  // grid-template-columns: 1fr 1fr 1fr;
-  // grid-template-rows: 50px 50px;
   width: 100%;
-
   position: relative;
-
   z-index: 1;
-
   height: 100%;
 `;
 
 const Cover = styled.div`
   width: 30%;
-
   background-image: url(${(props) => props.bgImage});
-
   background-position: center center;
-
   background-size: cover;
-
   height: 100%;
-
   border-radius: 5px;
 `;
 const Data = styled.div`
@@ -106,11 +86,8 @@ const Divider = styled.span`
 
 const Overview = styled.p`
   font-size: 17px;
-
   opacity: 0.9;
-
   line-height: 1.5;
-
   width: 50%;
   color: white;
 `;
@@ -138,7 +115,6 @@ const Heading = styled.h3`
   font-size: 1.4rem;
   margin-top: 10px;
   color: white;
-
   @media ${(props) => props.theme.mediaQueries.medium} {
     font-size: 1.2rem;
   }
@@ -163,13 +139,11 @@ const DetailPresenter = ({
   video,
   recommendations,
 }) => {
-  // console.log("result:", result);
   return loading ? (
     <>
       <Helmet>
-        <title>Loading | Nomflix</title>
+        <title>Detail | Nomflix</title>
       </Helmet>
-
       <Loader />
     </>
   ) : (
@@ -179,19 +153,11 @@ const DetailPresenter = ({
           {result.title ? result.title : result.original_name} | Nomflix
         </title>
       </Helmet>
-      <Backdrop
-        bgImage={`${IMAGE_BASE_URL}original${result.backdrop_path}`}
-      />
-
+      <Backdrop bgImage={`${IMAGE_BASE_URL}original${result.backdrop_path}`} />
       <Content>
-        <Cover
-          bgImage={`${IMAGE_BASE_URL}original${result.poster_path}`}
-        />
+        <Cover bgImage={`${IMAGE_BASE_URL}original${result.poster_path}`} />
         <Data>
-          <Title>
-            {isMovie ? result.title : result.name}
-
-          </Title>
+          <Title>{isMovie ? result.title : result.name}</Title>
 
           <ItemContainer>
             <Item>
@@ -224,10 +190,10 @@ const DetailPresenter = ({
               userFrom={localStorage.getItem("userId")}
             />
 
-            <RatingsWrapper>
+            {/* <RatingsWrapper>
               <Rating number={result.vote_average / 2} />
               <RatingNumber>{result.vote_average}</RatingNumber>
-            </RatingsWrapper>
+            </RatingsWrapper> */}
           </ItemContainer>
 
           <Overview>{result.overview}</Overview>

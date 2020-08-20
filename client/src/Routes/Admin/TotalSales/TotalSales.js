@@ -29,7 +29,6 @@ const useStyles = makeStyles(theme => ({
     width: 32,
   },
   difference: {
-    // marginTop: theme.spacing(2),
     display: "flex",
     alignItems: "center",
   },
@@ -38,8 +37,6 @@ const useStyles = makeStyles(theme => ({
   },
   differenceValue: {
     color: green[700],
-
-    // marginRight: theme.spacing(1),
   },
 }));
 
@@ -62,7 +59,7 @@ function TotalReservation() {
           const flatlist = reservationlist.flat(); //평탄화 함수!!!
           setReservationCount(flatlist.reduce(reducer));
         } else {
-          console.log("실패");
+          alert("실패");
         }
       })
       .catch(err => {
@@ -77,7 +74,7 @@ function TotalReservation() {
             accumulator + currentValue; //배열내에서 수계산
           setProductCount(response.data.arr.reduce(reducer));
         } else {
-          console.log("실패");
+          alert("실패");
         }
       })
       .catch(err => {
@@ -87,15 +84,10 @@ function TotalReservation() {
 
   // 총 매출 , 넣어주기
   var myData = ReservationCount + ProductCount;
-
   myData = AddComma(myData);
-
   function AddComma(data_value) {
     return Number(data_value).toLocaleString("en");
   }
-
-  // console.log(myData);
-
   return (
     <Card className={classnames(classes.root)}>
       <CardContent>
@@ -110,7 +102,6 @@ function TotalReservation() {
               TOTAL SALES
             </Typography>
             <Typography variant="h3">
-              {/* {ReservationCount + ProductCount}원 */}
               {myData}원
             </Typography>
           </Grid>

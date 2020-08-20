@@ -20,32 +20,6 @@ const Effect = styled.div`
 const TopSection = styled.div`
   margin-top: -160px;
 `;
-const Button = styled.button`
-  background: transparent;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  height: 44px;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  text-decoration: none;
-  color: #ffffff;
-  padding: 20px;
-  box-sizing: border-box;
-  border: 2px solid rgba(245, 245, 241, 0.2);
-  border-radius: 44px;
-  font-size: 14px;
-  font-weight: 600;
-  -webkit-transition: border 0.125s ease, background 0.125s ease;
-  transition: border 0.125s ease, background 0.125s ease;
-`;
 const Hero = styled.div`
   width: 100%;
   height: 100%;
@@ -67,29 +41,9 @@ const HeroContentP = styled.div`
   margin-top: 40px;
   color: white;
 `;
-const AButton = styled.a`
-  &:link {
-    text-decoration: none;
-    color: white;
-  }
-  &:visited {
-    text-decoration: none;
-    color: white;
-  }
-  &:active {
-    text-decoration: none;
-    color: gray;
-  }
-  &:hover {
-    text-decoration: none;
-    color: gray;
-  }
-`;
 const HomePresenter = ({
   nowPlaying,
-  popular,
   upcoming,
-  trending,
   loading,
   error,
 }) => (
@@ -225,17 +179,7 @@ const HomePresenter = ({
     )}
   </>
 );
-class HeroButton extends React.Component {
-  render() {
-    return (
-      <Button>
-        <AButton href="/movie/76341" data-primary={this.props.primary}>
-          {this.props.text}
-        </AButton>
-      </Button>
-    );
-  }
-}
+
 HomePresenter.propTypes = {
   nowPlaying: PropTypes.array,
   popular: PropTypes.array,

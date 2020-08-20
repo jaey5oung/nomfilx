@@ -105,9 +105,6 @@ export const SeatA2 = [
   { key: 2, value: "A2" },
   { key: 3, value: "A3" },
   { key: 4, value: "A4" },
-  // { key: 5, value: "A5" },
-  // { key: 6, value: "A6" },
-  // { key: 7, value: "A7" },
 ];
 
 export const SeatB2 = [
@@ -116,9 +113,6 @@ export const SeatB2 = [
   { key: 3, value: "B3" },
   { key: 4, value: "B4" },
   { key: 5, value: "B5" },
-  // { key: 6, value: "B6" },
-  // { key: 7, value: "B7" },
-  // { key: 8, value: "B8" },
 ];
 
 export const SeatC2 = [
@@ -161,8 +155,6 @@ export const SeatF2 = [
   { key: 4, value: "F4" },
   { key: 5, value: "F5" },
   { key: 6, value: "F6" },
-  // { key: 7, value: "F7" },
-  // { key: 8, value: "F8" },
 ];
 
 export const SeatG2 = [
@@ -172,6 +164,4 @@ export const SeatG2 = [
   { key: 4, value: "G4" },
   { key: 5, value: "G5" },
   { key: 6, value: "G6" },
-  // { key: 7, value: "G7" },
-  // { key: 8, value: "G8" },
 ];

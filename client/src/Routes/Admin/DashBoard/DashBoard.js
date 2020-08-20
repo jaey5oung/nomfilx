@@ -2,20 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Grid } from "@material-ui/core";
 import TotalUsers from "../TotalUser/TotalUsers";
 import TotleReservation from "../TotalReservation/TotalReservation";
-import { Doughnut, Line,Bar } from "react-chartjs-2";
-// import { Typography } from "@material-ui/core";
+import { Doughnut, Bar } from "react-chartjs-2";
 import axios from "axios";
 import TotalProduct from "../TotalProduct/TotalProduct";
 import TotalSales from "../TotalSales/TotalSales";
 
 
 function DashBoard() {
-  const [numOfCGV, setNumOfCGV] = useState(0);
-  const [numOfLotte, setNumOfLotte] = useState(0);
-  const [numOfMega, setNumOfMega] = useState(0);
   const [user, setUser] = useState([]);
-  
-
   // 19개 장르
   const [action, setAction] = useState(0);
   const [adventure, setAdventure] = useState(0);
@@ -38,8 +32,6 @@ function DashBoard() {
   const [western, setWestern] = useState(0);
 
   const fetchGenres = function () {
-
-
     axios.post("/api/myscore/getAllGenres").then((response) => {
       if (response.data.success) {
         const listOfGenreNum = response.data.genres.map((g) => {
@@ -140,24 +132,6 @@ function DashBoard() {
     }
   });
 
-  const expData = {
-    labels: ["메가박스", "CGV", "롯데시네마"],
-    datasets: [
-      {
-        labels: ["메가박스", "CGV", "롯데시네마"],
-        data: [numOfMega, numOfCGV, numOfLotte],
-        borderWidth: 3,
-        hoverBorderWidth: 4,
-        backgroundColor: [
-          "rgba(238, 102, 121, 1)",
-          "rgba(98, 181, 229, 1)",
-          "rgba(255, 198, 0, 1)",
-        ],
-        fill: true,
-      },
-    ],
-  };
-
   const expDataUserGender = {
     labels: ["남자", "여자"],
     datasets: [
@@ -181,7 +155,6 @@ function DashBoard() {
     width: "60%",
     height: "100%",
     marginTop: "70px",
-    
     float: "right",
   };
   const data = {
@@ -263,20 +236,14 @@ function DashBoard() {
       ],
       yAxes: [
         {
-          // stacked: true,
           gridLines: {
             display: false,
           },
           ticks: {
             beginAtZero: true,
-            // Return an empty string to draw the tick line but hide the tick label
-            // Return `null` or `undefined` to hide the tick line entirely
             userCallback(value) {
-              // Convert the number to a string and splite the string every 3 charaters from the end
               value = value.toString();
               value = value.split(/(?=(?:...)*$)/);
-
-              // Convert the array to a string and format the output
               value = value.join(".");
               return `Rp.${value}`;
             },
@@ -334,39 +301,13 @@ function DashBoard() {
             width: "40%",            
           }}
         >
-          {/* <div
-            style={{
-              // display: "flex",
-              width: "80%",
-              float: "bottom",
-              border: "1px solid blue",
-              // backgroundColor: "skyblue",
-              padding: "1%",
-              margin: "3%",
-              marginLeft: "0%",
-            }}
-          >
-            <Doughnut
-              options={{
-                legend: {
-                  display: true,
-                  position: "bottom",
-                },
-              }}
-              data={expData}
-              // height={180}
-            />
-          </div> */}
           <div
             style={{
-              // display: "flex",
               margin: "3%",
               marginLeft: "0%",              
               padding: "1%",
               width: "100%",
-              height:"100%",              
-              // border: "1px solid yellow",
-              // backgroundColor: "pink",
+              height:"100%",
             }}
           >
             <Doughnut
@@ -385,9 +326,7 @@ function DashBoard() {
             />
           </div>
         </div>
-
         <div style={styles}>
-          {/* <Line data={data} options={lineOptions} /> */}
           <Bar data={data} options={lineOptions} />
         </div>
       </div>

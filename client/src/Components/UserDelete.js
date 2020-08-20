@@ -8,31 +8,26 @@ import Typography from '@material-ui/core/Typography';
 import Axios from 'axios';
 
 class UserDelete extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
             open: false
         }
     }
-
     handleClickOpen = () => {
         this.setState({
             open: true
         });
     }
-
     handleClose = () => {
         this.setState({
             open: false
         })
     }
-
     deleteCustomer(email) {
         const variables = {
             email,
           }
-      
           Axios.post('/api/users/removeFromUsers', variables)
           .then(response => {
             if(response.data.success){

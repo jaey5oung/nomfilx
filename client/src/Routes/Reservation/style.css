@@ -5,8 +5,6 @@
   height: 120px;
 }
 .seat {
-  /* background-color: #444451; */
-
   background-color: rgb(96, 93, 170);
   font-size: 13px;
   text-align: center;
@@ -38,7 +36,6 @@
   transform: scale(1);
 }
 .showcase {
-  /* background: rgba(0, 0, 0, 0.1); */
   padding: 5px 10px;
   border-radius: 5px;
   color: #777;

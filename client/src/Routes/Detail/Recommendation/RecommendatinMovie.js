@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { IMAGE_BASE_URL, POSTER_SIZE } from "../../../Components/Config";
 
 const MovieImg = styled.img`
@@ -11,7 +10,6 @@ const MovieImg = styled.img`
   border-radius: 4px;
   transition: all 0.1s linear 0s;
   margin-bottom: 10px;
-  // border: 1px solid blue;
 `;
 
 const Title = styled.span`
@@ -26,7 +24,6 @@ const Title = styled.span`
 
 const RecommendatinMovie = ({ movie, id }) => {
   return (
-    // <Link to={`/movie/${id}`}>
     <a href={`/movie/${id}`}>
       <MovieImg
         src={
@@ -40,8 +37,6 @@ const RecommendatinMovie = ({ movie, id }) => {
           ? `${movie.title.substring(0, 8)}...`
           : movie.title}
       </Title>
-      {/* {title.length > 18 ? `${title.substring(0, 8)}...` : title} */}
-      {/* </Link> */}
     </a>
   );
 };

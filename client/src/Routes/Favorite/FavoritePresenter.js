@@ -1,8 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-// import Section from "../../Components/Section";
-
 import FavoriteSection from "../../Components/FavoriteSection";
 import Loader from "../../Components/Loader";
 import Message from "../../Components/Message";
@@ -25,7 +23,6 @@ const FavoritePresenter = ({
       <Helmet>
         <title>Favorites | Nomflix</title>
       </Helmet>
-
       {loading ? (
         <Loader />
       ) : (

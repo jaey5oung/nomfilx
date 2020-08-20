@@ -54,14 +54,7 @@ const Item = styled.li`
   height: 50px;
   float: right;
   text-align: center;
-  // border-bottom: 5px solid
-  //   ${props => (props.current ? "mediumslateblue" : "transparent")};
-  // transition: border-bottom 0.5s ease-in-out;
-  // &:hover {
-  //   background: mediumslateblue;
-  //   cursor: pointer;
-  // }
-`
+`;
 const SLink = styled(Link)`
   font-size: 13px;
   height: 50px;
@@ -88,7 +81,6 @@ const SLink = styled(Link)`
 `
 //헤더 색 scroll에따라 변화/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const handleScroll = () => {
-  // //scroll처리
   const windowHeight =
     "innerHeight" in window ? window.innerHeight : document.documentElement.offsetHeight
   const body = document.body
@@ -99,30 +91,25 @@ const handleScroll = () => {
     html.clientHeight,
     html.scrollHeight,
     html.offsetHeight
-  )
-  const windowBottom = windowHeight + window.pageYOffset
-  var x = document.getElementById("header")
-  var y = 0
-  // console.log("wind:", windowBottom); //308~1542
-  // console.log("doc", docHeight);
-  //메인-1542 // 평가-2520 // 찜 - 600 //검색-2270 //매점 - 500 => 페이지마다 docHeight가 변함
+  );
+  const windowBottom = windowHeight + window.pageYOffset;
+  var x = document.getElementById("header");
+  var y = 0;
   if (docHeight > 2000) {
-    y = 1800
-    // console.log("doc", docHeight);
+    y = 1800;
   } else if (docHeight > 1000) {
     y = 500
   } else {
     y = 1
   }
   if (windowBottom < docHeight - y) {
-    x.style.backgroundColor = "transparent"
-    // console.log("trans");
+    if(x === null) { return x=document.getElementById("header")}
+    x.style.backgroundColor = "transparent";
   } else if (windowBottom > docHeight - y) {
-    x.style.backgroundColor = "#171717"
-    // console.log("black");
+    if(x === null) { return x=document.getElementById("header") }
+    x.style.backgroundColor = "#171717";
   }
-}
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+};
 export default withRouter(
   (
     props //withRouter 때문에 props를 가질 수 있다.
@@ -185,12 +172,11 @@ export default withRouter(
                     <div
                       style={{
                         display: "flex",
-                        // textAlign: "right",
                         margin: "0px auto",
-                        fontColor: "#e5e5e5",
+                        color: "#e5e5e5",
                       }}
                     >
-                      <span style={{ textAlign: "center", marginTop: "6px", fontColor: "#e5e5e5" }}>
+                      <span style={{ textAlign: "center", marginTop: "6px", color: "#e5e5e5" }}>
                         {user.userData && user.userData.name.length > 7
                           ? `${user.userData.name.substring(0, 4)}...`
                           : user.userData.name}
@@ -203,7 +189,7 @@ export default withRouter(
                           objectFit: "cover",
                           marginLeft: "10px",
                           justifyContent: "center",
-                          fontColor: "#e5e5e5",
+                          color: "#e5e5e5",
                         }}
                         src={
                           user.userData.image
@@ -211,7 +197,7 @@ export default withRouter(
                             : `${LOCAL_SERVER}uploads/default.png`
                         }
                         alt="haha"
-                        fontColor="#e5e5e5"
+                        color="#e5e5e5"
                         width="24rem"
                         height="23rem"
                       />
@@ -226,7 +212,7 @@ export default withRouter(
                       display: "flex",
                       itemAlign: "center",
                       margin: "0px auto",
-                      fontColor: "#e5e5e5",
+                      color: "#e5e5e5",
                     }}
                   >
                     <Badge
@@ -236,7 +222,7 @@ export default withRouter(
                     >
                       <SLink to="/mymovie" className="head-example">
                         <ShoppingCartOutlined
-                          style={{ fontSize: 25, marginLeft: "10px", fontColor: "#e5e5e5" }}
+                          style={{ fontSize: 25, marginLeft: "10px", color: "#e5e5e5" }}
                         />
                       </SLink>
                     </Badge>

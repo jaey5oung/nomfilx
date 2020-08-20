@@ -8,16 +8,15 @@ import DatePicker, { utils } from "react-modern-calendar-datepicker";
 import Select from "react-select";
 import styled from "styled-components";
 import Axios from "axios";
+
 const colourStyles = {
-  control: styles => ({
+  control: (styles) => ({
     ...styles,
     backgroundColor: "white",
     borderRadius: "1rem",
     fontSize: "1.1rem",
     width: "250px",
     textAlign: "center",
-    // marginTop: "25px",
-    // height: "10px",
     border: "1px solid #9c88ff",
     boxShadow: "0 1.5rem 2rem rgba(156, 136, 255, 0.2)",
     color: "#2e2e2e",
@@ -27,7 +26,6 @@ const colourStyles = {
     return {
       ...styles,
       backgroundColor: isDisabled ? "#d4d4d4" : "#f7f7f7",
-      // backgroundColor: isFocused ? "#D8CEF6" : "#f7f7f7",
       color: "#151515",
       fontSize: "1.1rem",
       cursor: isDisabled ? "not-allowed" : "default",
@@ -35,7 +33,7 @@ const colourStyles = {
   },
 };
 // 예약 버튼
-const Button1 = styled.button` 
+const Button1 = styled.button`
   position: relative;
   color: #9c88ff;
   border: 3px solid #9c88ff;
@@ -49,8 +47,8 @@ const Button1 = styled.button`
 `;
 //시간 버튼
 const Button2 = styled.button`
-color: black;
-font-weight: 800;
+  color: black;
+  font-weight: 800;
   font-size: 15px;
   margin: 8px;
   padding: 5px 12px 5px 12px;
@@ -66,8 +64,8 @@ const Wrapper = styled.div`
   padding: 5px;
 `;
 const TitleWrapper = styled.div`
-margin-top: 10px;
-margin-bottom: 8px;
+  margin-top: 10px;
+  margin-bottom: 8px;
 `;
 const Title = styled.span`
   font-size: 18px;
@@ -75,9 +73,8 @@ const Title = styled.span`
 `;
 
 const InnerWrapper = styled.div`
-  min-height:200px;
-  max-width:450px;
-  /* padding-top:10px; */
+  min-height: 200px;
+  max-width: 450px;
 `;
 
 const Continents1 = [
@@ -119,6 +116,8 @@ const Reservation = ({ userFrom, nowPlaying }) => {
   const [theater, setTheater] = useState(0);
   const [key, setKey] = useState(0);
   const [Distinct, setDistinct] = useState([]);
+  const [buttonState, setButtonState] = useState(false);
+  // const [compareButtonState, setCompareButtonState] = useState(true);
 
   const renderCustomInput = ({ ref }) => (
     <input
@@ -131,26 +130,22 @@ const Reservation = ({ userFrom, nowPlaying }) => {
           : ""
       }
       style={{
-        // textAlign: "center",
         borderRadius: "1rem",
         fontSize: "1.1rem",
         border: "1px solid #9c88ff",
         boxShadow: "0 1.5rem 2rem rgba(156, 136, 255, 0.2)",
         color: "#2e2e2e",
         outline: "none",
-        // marginLeft: "10px",
         width: "250px",
         height: "38px",
-        // marginTop: "10px",
-        // marginBottom: "10px",
       }}
       className="my-custom-input-class"
     />
   );
-  const onTime = value => {
+  const onTime = (value) => {
     setTime({ time: value });
   };
-  const onMovie = event => {
+  const onMovie = (event) => {
     setMovie(event.value);
     setPoster(event.poster);
     setID(event.id);
@@ -163,10 +158,10 @@ const Reservation = ({ userFrom, nowPlaying }) => {
       title: movie,
     };
     Axios.post("/api/reservation/findSeat", movieTitle)
-      .then(response => {
+      .then((response) => {
         if (response.data.success) {
           let seatlist = [];
-          response.data.seats.forEach(obj => {
+          response.data.seats.forEach((obj) => {
             if (
               obj.selectDay[0].day === selectDay.day &&
               obj.selectDay[0].month === selectDay.month &&
@@ -178,7 +173,7 @@ const Reservation = ({ userFrom, nowPlaying }) => {
           setDistinct(seatlist);
         }
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   }, [movie, selectDay, time, theater]);
@@ -187,13 +182,32 @@ const Reservation = ({ userFrom, nowPlaying }) => {
     let countAllSeats = theater % 2 === 1 ? 55 : 45;
     let count = 0;
     Distinct &&
-      Distinct.forEach(obj => {
+      Distinct.forEach((obj) => {
         if (obj.time[0].time === time && obj.theater === theater) {
           count = count + obj.continent;
         }
       });
-      let myColor=(countAllSeats-count)>10? "#2e2e2e" : "red"; 
-    return <span style={{ color: myColor, fontWeight:"500" }}>{countAllSeats - count}석</span>;
+    let myColor = countAllSeats - count > 10 ? "#2e2e2e" : "red";
+    return (
+      <span style={{ color: myColor, fontWeight: "500" }}>
+        {countAllSeats - count}석
+      </span>
+    );
+  };
+
+  const setEffect = (props) => {
+    buttonState ? buttonStateFalse(props) : buttonStateTrue(props);
+  };
+
+  const buttonStateFalse = (props) => {
+    setButtonState(false);
+    props.currentTarget.style.backgroundColor = "mediumslateblue";
+    props.currentTarget.style.outline = "none";
+  };
+  const buttonStateTrue = (props) => {
+    setButtonState(true);
+    props.currentTarget.style.backgroundColor = "white";
+    props.currentTarget.style.outline = "none";
   };
 
   return (
@@ -211,12 +225,9 @@ const Reservation = ({ userFrom, nowPlaying }) => {
         width: "500px",
         borderRadius: "10px",
         padding: "1%",
-        // height: "400px",
         border: "2px solid #848484",
       }}
-    // style={{background:"black"}}
     >
-      {/* <Grid container style={{ background: "#242333"}}> */}
       <Wrapper>
         <DatePicker
           value={selectDay}
@@ -229,7 +240,6 @@ const Reservation = ({ userFrom, nowPlaying }) => {
       <Wrapper>
         <Select
           options={movieOptions}
-          // defaultValue={groupedOptions[1]}
           placeholder="  영화를 선택해주세요"
           styles={colourStyles}
           onChange={onMovie}
@@ -238,46 +248,61 @@ const Reservation = ({ userFrom, nowPlaying }) => {
       <Wrapper>
         {visible ? (
           <InnerWrapper>
-            <TitleWrapper style={{marginTop:"5px"}}>
-            <Title>
-              {movie}&nbsp;&nbsp;|&nbsp;&nbsp;<span style={{color:"#d8d8d8"}}>{key - 1}관</span>
-            </Title>
+            <TitleWrapper style={{ marginTop: "5px" }}>
+              <Title>
+                {movie}&nbsp;&nbsp;|&nbsp;&nbsp;
+                <span style={{ color: "#d8d8d8" }}>{key - 1}관</span>
+              </Title>
             </TitleWrapper>
             {Continents1.map((item, index) => (
-                <Button2
-                  key={index}
-                  onClick={() => {
-                    setTheater(key - 1);
-                    onTime(item.value);
-                  }}
-                >
-                    {item.label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{countLeftSeats(item.value, key - 1)}
-                </Button2>
+              <Button2
+                id="timeButton"
+                key={index}
+                onClick={(props) => {
+                  setTheater(key - 1);
+                  onTime(item.value);
+                  setEffect(props);
+                }}
+              >
+                {item.label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                {countLeftSeats(item.value, key - 1)}
+              </Button2>
             ))}
             <TitleWrapper>
-            <Title>
-            {movie}&nbsp;&nbsp;|&nbsp;&nbsp;<span style={{color:"#d8d8d8"}}>{key}관</span> 
-            </Title>
+              <Title>
+                {movie}&nbsp;&nbsp;|&nbsp;&nbsp;
+                <span style={{ color: "#d8d8d8" }}>{key}관</span>
+              </Title>
             </TitleWrapper>
             {Continents2.map((item, index) => (
               <Button2
                 key={index}
-                onClick={() => {
+                onClick={(props) => {
                   setTheater(key);
                   onTime(item.value);
+                  buttonState
+                    ? buttonStateFalse(props)
+                    : buttonStateTrue(props);
                 }}
               >
-                  {item.label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;{countLeftSeats(item.value, key)}
+                {item.label}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                {countLeftSeats(item.value, key)}
               </Button2>
             ))}
           </InnerWrapper>
         ) : (
-            <div style={{ textAlign: "center", marginTop:"10px", marginBottom:"10px" }}>
-              <span style={{ fontSize: "20px" }}>
-                클릭하면 영화 시간이 보입니다.
+          <div
+            style={{
+              textAlign: "center",
+              marginTop: "10px",
+              marginBottom: "10px",
+            }}
+          >
+            <span style={{ fontSize: "20px" }}>
+              클릭하면 영화 시간이 보입니다.
             </span>
-            </div>
-          )}
+          </div>
+        )}
       </Wrapper>
       <Wrapper>
         <>
@@ -322,7 +347,6 @@ const Reservation = ({ userFrom, nowPlaying }) => {
           </Popup>
         </>
       </Wrapper>
-      {/* </Grid> */}
     </Popup>
   );
 };

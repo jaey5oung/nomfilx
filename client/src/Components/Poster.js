@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { IMAGE_BASE_URL } from "./Config";
-// import Ratingg from '../Components/Rating';
+
 const Container = styled.div`
   font-size: 9px;
   min-height: 350px;
@@ -64,18 +64,14 @@ const ImageContainer = styled.div`
   }
 `;
 const Title = styled.span`
-  /* border: 5px solid green;  */
-  font-size: 18px;
+  font-size:18px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  // align-items:flex-start
-  align-items: center;
+  align-items:center;
   padding: 1.5rem 3rem;
 `;
 const Year = styled.span`
-  // font-size: 10px;
-  // color: rgba(255, 255, 255, 0.5);
   display: flex;
   position: relative;
   align-items: center;
@@ -92,7 +88,7 @@ const RatingsWrapper = styled.div`
     color: var(--color-primary-lighter);
   }
 `;
-const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
+const Poster = ({ id, imageUrl, title, rating }) => (
   <Link to={`/movie/${id}`}>
     <Container>
       <ImageContainer>
@@ -111,11 +107,12 @@ const Poster = ({ id, imageUrl, title, rating, year, isMovie = false }) => (
         </Rating>
       </ImageContainer>
       <RatingsWrapper>
-        <Title>
-          {title.length > 8 ? `${title.substring(0, 4)}...` : title}
-        </Title>
-        <Year>{/* <Ratingg number = {rating/2}/>         */}</Year>
-      </RatingsWrapper>
+      <Title>
+        {title.length > 8 ? `${title.substring(0, 4)}...` : title}
+      </Title>
+      <Year>
+       </Year>
+       </RatingsWrapper>
     </Container>
   </Link>
 );

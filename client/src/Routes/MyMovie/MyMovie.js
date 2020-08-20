@@ -58,7 +58,7 @@ function MyMovie(props) {
         );
       }
     }
-  }, [props.user.userData]);
+  }, [props.user.userData, dispatch]);
 
   let calculateTotal = cartDetail => {
     let total = 0;
@@ -100,7 +100,6 @@ function MyMovie(props) {
   };
 
   const onKaKaoPay = () => {
-    console.log("kakao");
     var IMP = window.IMP; // 생략가능
     IMP.init("imp10561880");
     // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
@@ -128,8 +127,6 @@ function MyMovie(props) {
           msg += "고유ID : " + rsp.imp_uid;
           msg += "상점 거래ID : " + rsp.merchant_uid;
           msg += "결제 금액 : " + rsp.paid_amount;
-          // msg += "카드 승인번호 : " + rsp.apply_num;
-
           transactionSuccess(id);
         } else {
           msg = "결제에 실패하였습니다.";
@@ -156,8 +153,6 @@ function MyMovie(props) {
               fontSize: "35px",
               color: "white",
               textAlign: "right",
-              // border: "2px solid white",
-              // backgroundColor: "white",
               width: "100%",
             }}
           >
@@ -180,12 +175,6 @@ function MyMovie(props) {
             <Button1 variant="contained" color="primary" onClick={onKaKaoPay}>
               주문하기
             </Button1>
-            // <img
-            //   src={require("../../img/kakaoPay.png")}
-            //   alt="kakaoPay"
-            //   style={{ width: "5%", height: "2%", float: "right" }}
-            //   onClick={onKaKaoPay}
-            // />
           )}
         </div>
       </div>

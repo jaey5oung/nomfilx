@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core';
 import { Paper } from '@material-ui/core';
 
 // Component styles
-const styles = theme => {
+const styles = () => {
   return {
     root: {
       borderRadius: '4px',

@@ -6,8 +6,6 @@ export default class extends React.Component {
   state = {
     nowPlaying: null,
     upcoming: null,
-    popular: null,
-    trending: null,
     error: null,
     loading: true,
   };
@@ -30,19 +28,10 @@ export default class extends React.Component {
       const {
         data: { results: upcoming },
       } = await moviesApi.upcoming();
-      const {
-        data: { results: popular },
-      } = await moviesApi.popular();
-      const {
-        data: { results: trending },
-      } = await moviesApi.trending();
 
-      // throw Error(); 에러 테스트 할때''
       this.setState({
         nowPlaying, //nowPlaying: nowPlaying 이랑 같은 표현
         upcoming,
-        popular,
-        trending,
       });
     } catch {
       this.setState({
@@ -59,8 +48,6 @@ export default class extends React.Component {
     const {
       nowPlaying,
       upcoming,
-      popular,
-      trending,
       error,
       loading,
       settings,
@@ -70,8 +57,6 @@ export default class extends React.Component {
       <HomePresenter
         nowPlaying={nowPlaying}
         upcoming={upcoming}
-        popular={popular}
-        trending={trending}
         error={error}
         loading={loading}
         settings={settings}

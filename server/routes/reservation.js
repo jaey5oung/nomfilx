@@ -11,7 +11,6 @@ router.post("/", (req, res) => {
   });
 });
 
-//select * from reservation where title = title
 router.post("/findSeat", (req, res) => {
   Reservation.find({ title: req.body.title }).exec((err, seats) => {
     if (err) return res.status(400).json({ success: false, err });
@@ -45,7 +44,7 @@ router.get("/reservation_by_id", auth, (req, res) => {
       return item;
     });
   }
-  // Reservation.find({ userFrom: req.user._id })
+  
   Reservation.find({ _id: { $in: movieIds } })
     .populate("userForm")
     .exec((err, movie) => {

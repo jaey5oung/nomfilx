@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { Col, Card, Row } from "antd";
 import Meta from "antd/lib/card/Meta";
 import ImageSlider from "../../utils/ImageSlider";
 import SearchFeature from "./Section/SearchFeature";
-import "./mystyle.css";
 import styled from "styled-components";
 
 const Button1 = styled.button`
@@ -23,10 +21,10 @@ const Button1 = styled.button`
 function Product() {
   const [Products, setProducts] = useState([]);
   const [Skip, setSkip] = useState(0);
-  const [Limit, setLimit] = useState(8);
   const [PostSize, setPostSize] = useState(0);
   const [SearchTerm, setSearchTerm] = useState("");
-
+  const[Limit, setLimit] = useState(8);
+  
   useEffect(() => {
     let body = {
       skip: Skip,
@@ -63,10 +61,7 @@ function Product() {
     getProducts(body);
     setSkip(skip);
   };
-  //#f7f7f7
-  //f7f7f7
-  //#91CCF1
-  //style={{ marginRight: "0px", marginLeft: "0px", height: "100%" }}
+
   const renderCards = Products.map((product, index) => {
     return (
       <Col lg={6} md={7} xs={24} key={index}>
@@ -76,7 +71,6 @@ function Product() {
             height: "80%",
             border: "6px solid #9c88ff",
             backgroundColor: "white",
-            // borderColor: "white",
             borderRadius: "5px",
             marginBottom: "50px",
           }}
@@ -114,9 +108,6 @@ function Product() {
 
   return (
     <div style={{ width: "75%", margin: "3rem auto" }}>
-      {/* Filter  */}
-
-      {/* Search */}
       <div
         style={{
           display: "flex",
@@ -145,13 +136,8 @@ function Product() {
       </div>
       <br />
       <br />
-
-      {/* Cards */}
-
       <Row gutter={(16, 16)}>{renderCards}</Row>
-
-      <br />
-
+      <br />  
       {PostSize >= Limit && (
         <div
           style={{ display: "flex", justifyContent: "center", color: "black" }}
