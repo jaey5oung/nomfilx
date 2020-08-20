@@ -67,7 +67,7 @@ const SearchPresenter = ({
         {error && <Message color="#e74c3c" text={error} />}
         {movieResults &&
           movieResults.length === 0 && (
-            <Message text="Nothing found" color="#95a5a6" />
+            <Message text="검색결과가 없습니다" color="#95a5a6"  />
           )}
       </>
     )}
