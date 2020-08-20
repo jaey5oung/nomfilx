@@ -1,52 +1,47 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import Section from "Components/Section";
-import Loader from "../../Components/Loader";
-import Message from "../../Components/Message";
-import Poster from "../../Components/Poster";
-import Helmet from "react-helmet";
-import { withRouter } from "react-router-dom";
-import { Carousel } from "antd";
+import React from "react"
+import PropTypes from "prop-types"
+import styled from "styled-components"
+import Section from "Components/Section"
+import Loader from "../../Components/Loader"
+import Message from "../../Components/Message"
+import Poster from "../../Components/Poster"
+import Helmet from "react-helmet"
+import { withRouter } from "react-router-dom"
+import { Carousel } from "antd"
 const Container = styled.div`
   scroll-behavior: smooth;
   margin-top: -50px;
   z-index: -1;
-`;
+`
 const Effect = styled.div`
   width: 100%;
   margin-top: 600px;
-`;
+`
 const TopSection = styled.div`
   margin-top: -160px;
-`;
+`
 const Hero = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-`;
+`
 const HeroContent = styled.div`
   position: relative;
   z-index: 4;
   width: auto;
   left: 10px;
   top: 10px;
-`;
+`
 const HeroContentText = styled.span`
   font-size: 60px;
-`;
+`
 const HeroContentP = styled.div`
   width: 100%;
   font-size: 20px;
   margin-top: 40px;
   color: white;
-`;
-const HomePresenter = ({
-  nowPlaying,
-  upcoming,
-  loading,
-  error,
-}) => (
+`
+const HomePresenter = ({ nowPlaying, upcoming, loading, error }) => (
   <>
     <Helmet>
       <title>Movies | Nomflix</title>
@@ -55,7 +50,7 @@ const HomePresenter = ({
       <Loader />
     ) : (
       <>
-        <Container onWheel={e => {}}>
+        <Container onWheel={(e) => {}}>
           <Carousel autoplay>
             <div>
               <div style={{ position: "absolute" }}>
@@ -144,22 +139,20 @@ const HomePresenter = ({
               <Section title="Now Playing" nowPlaying={nowPlaying}>
                 {nowPlaying.map((movie) => (
                   <Poster
-                  key={movie.id}
-                  id={movie.id}
-                  imageUrl={movie.poster_path}
-                  title={movie.title}
-                  rating={movie.vote_average}
-                  year={movie.release_date.substring(0, 4)}
-                  isMovie={true}
+                    key={movie.id}
+                    id={movie.id}
+                    imageUrl={movie.poster_path}
+                    title={movie.title}
+                    rating={movie.vote_average}
+                    year={movie.release_date.substring(0, 4)}
+                    isMovie={true}
                   />
-                  )
-                  )
-                }
-                </Section>
+                ))}
+              </Section>
             )}
             {upcoming && upcoming.length > 0 && (
               <Section title="Upcoming">
-                {upcoming.map(movie => (
+                {upcoming.map((movie) => (
                   <Poster
                     key={movie.id}
                     id={movie.id}
@@ -178,7 +171,7 @@ const HomePresenter = ({
       </>
     )}
   </>
-);
+)
 
 HomePresenter.propTypes = {
   nowPlaying: PropTypes.array,
@@ -186,7 +179,7 @@ HomePresenter.propTypes = {
   upcoming: PropTypes.array,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.string,
-};
-export default withRouter(HomePresenter);
+}
+export default withRouter(HomePresenter)
 //프리젠터는 그 데이터들을 보여주는 역할을 한다. 프리젠터는 스타일이고, 컨테이너는 데이타야.
 //react에서 children은 일반적으로 태그 사이의 값을 받아.
