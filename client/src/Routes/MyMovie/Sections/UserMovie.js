@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import classNames from "classnames";
-import { withStyles } from "@material-ui/core";
+import React, { Component } from "react"
+import classNames from "classnames"
+import { withStyles } from "@material-ui/core"
 import {
   Table,
   TableBody,
@@ -8,33 +8,33 @@ import {
   TableHead,
   TableRow,
   TablePagination,
-} from "@material-ui/core";
-import Portlet from "./Portlet";
-import PortletContent from "./PortletContent";
-import styles from "./styles";
+} from "@material-ui/core"
+import Portlet from "./Portlet"
+import PortletContent from "./PortletContent"
+import styles from "./styles"
 
 class UserMovie extends Component {
   state = {
     rowsPerPage: 10,
     page: 0,
-  };
+  }
 
   static defaultProps = {
     movies: [],
-  };
+  }
 
   handleChangePage = (event, page) => {
-    this.setState({ page });
-  };
+    this.setState({ page })
+  }
 
-  handleChangeRowsPerPage = event => {
-    this.setState({ rowsPerPage: event.target.value });
-  };
+  handleChangeRowsPerPage = (event) => {
+    this.setState({ rowsPerPage: event.target.value })
+  }
 
   render() {
-    const { classes, className, movies, removeItem } = this.props;
-    const { rowsPerPage, page } = this.state;
-    const rootClassName = classNames(classes.root, className);
+    const { classes, className, movies, removeItem } = this.props
+    const { rowsPerPage, page } = this.state
+    const rootClassName = classNames(classes.root, className)
     return (
       <Portlet className={rootClassName} style={{ backgroundColor: "#2D2D2D" }}>
         <PortletContent noPadding>
@@ -63,55 +63,37 @@ class UserMovie extends Component {
                   Total
                 </TableCell>
                 <TableCell align="left" style={{ color: "white" }}>
-                  환불
+                  예매 취소
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {movies
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(movie => (
-                  <TableRow className={classes.tableRow} hover key={movie._id}>
-                    <TableCell className={classes.tableCell}>
-                      {movie.title}
-                    </TableCell>
-                    <TableCell className={classes.tableCell}>
-                      {movie.theater}관
-                    </TableCell>
-                    <TableCell className={classes.tableCell}>
-                      {movie.seat ? movie.seat
-                      .sort()
-                      .map((seat, index) => {
-                    if (index < movie.seat.length - 1) {
-                      return seat + ", ";
-                    } else {
-                      return seat;
-                    }
-                  }) : "not found"}
-                    </TableCell>
-                    <TableCell className={classes.tableCell}>
-                      {movie.selectDay[0].day}/{movie.selectDay[0].month}/
-                      {movie.selectDay[0].year}
-                    </TableCell>
-                    <TableCell className={classes.tableCell}>
-                      {movie.time[0].time}
-                    </TableCell>
-                    <TableCell className={classes.tableCell}>
-                      {movie.price}
-                    </TableCell>
-                    <TableCell className={classes.tableCell}>
-                      {movie.continent}
-                    </TableCell>
-                    <TableCell
-                      className={classes.tableCell}
-                      style={{ color: "#2d2d2d" }}
-                    >
-                      <button onClick={() => removeItem(movie._id)}>
-                        환불
-                      </button>
-                    </TableCell>
-                  </TableRow>
-                ))}
+              {movies.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((movie) => (
+                <TableRow className={classes.tableRow} hover key={movie._id}>
+                  <TableCell className={classes.tableCell}>{movie.title}</TableCell>
+                  <TableCell className={classes.tableCell}>{movie.theater}관</TableCell>
+                  <TableCell className={classes.tableCell}>
+                    {movie.seat
+                      ? movie.seat.sort().map((seat, index) => {
+                          if (index < movie.seat.length - 1) {
+                            return seat + ", "
+                          } else {
+                            return seat
+                          }
+                        })
+                      : "not found"}
+                  </TableCell>
+                  <TableCell className={classes.tableCell}>
+                    {movie.selectDay[0].day}/{movie.selectDay[0].month}/{movie.selectDay[0].year}
+                  </TableCell>
+                  <TableCell className={classes.tableCell}>{movie.time[0].time}</TableCell>
+                  <TableCell className={classes.tableCell}>{movie.price}</TableCell>
+                  <TableCell className={classes.tableCell}>{movie.continent}</TableCell>
+                  <TableCell className={classes.tableCell} style={{ color: "#2d2d2d" }}>
+                    <button onClick={() => removeItem(movie._id)}>예매 취소</button>
+                  </TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
           <TablePagination
@@ -132,8 +114,8 @@ class UserMovie extends Component {
           />
         </PortletContent>
       </Portlet>
-    );
+    )
   }
 }
 
-export default withStyles(styles)(UserMovie);
+export default withStyles(styles)(UserMovie)

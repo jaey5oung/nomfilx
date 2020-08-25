@@ -7,7 +7,7 @@ export const BACKDROP_SIZE = "w1280";
 export const IMAGE_SIZE = "w1280";
 // w92, w154, w185, w342, w500, w780, original
 export const POSTER_SIZE = "w500";
-export const LOCAL_SERVER = "http://localhost:5000/";
+export const LOCAL_SERVER = "http://localhost:5000/api/";
 export const CLIENT = "http://localhost:3000/";
 export const GOOGLE_KEY =
   "929257267887-jabje0s2v9gdvfrm1avh5qr1q63j9p91.apps.googleusercontent.com";
